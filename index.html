@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta etiquetas para controlar el caché del navegador -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Explorador de Archivos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -200,9 +204,28 @@
             color: #777;
             margin-left: 26px;
         }
+        
+        /* Indicador de recarga */
+        .refresh-indicator {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            z-index: 1000;
+            display: none;
+        }
     </style>
 </head>
 <body>
+    <!-- Indicador de recarga -->
+    <div class="refresh-indicator" id="refreshIndicator">
+        <i class="fas fa-sync-alt fa-spin"></i> Actualizando datos...
+    </div>
+
     <div class="container">
         <header>
             <h1><i class="fas fa-folder-tree"></i> Explorador de Archivos</h1>
@@ -233,6 +256,19 @@
             let currentPath = [];
             let searchResults = [];
             let isSearchMode = false;
+            
+            // Mostrar indicador de recarga
+            const refreshIndicator = document.getElementById('refreshIndicator');
+            refreshIndicator.style.display = 'block';
+            
+            // Verificar si la página se está cargando desde el caché del navegador
+            window.addEventListener('pageshow', function(event) {
+                // Si event.persisted es true, significa que la página se cargó desde el caché
+                if (event.persisted) {
+                    // Forzar una recarga completa
+                    window.location.reload();
+                }
+            });
 
             // Cargar la estructura de archivos desde el JSON
             fetch('directory_structure.json?v=' + new Date().getTime())
@@ -246,6 +282,10 @@
                     fileStructure = data;
                     renderExplorer();
                     updateStats();
+                    // Ocultar indicador de recarga
+                    setTimeout(() => {
+                        refreshIndicator.style.display = 'none';
+                    }, 500);
                 })
                 .catch(error => {
                     console.error('Error al cargar la estructura de archivos:', error);
@@ -256,6 +296,8 @@
                             <p>Asegúrate de que el archivo <code>directory_structure.json</code> esté en la misma carpeta que este HTML y que el contenido sea correcto.</p>
                             <p>Detalles del error: ${error.message}</p>
                         </div>`;
+                    // Ocultar indicador de recarga
+                    refreshIndicator.style.display = 'none';
                 });
 
             function renderExplorer() {
