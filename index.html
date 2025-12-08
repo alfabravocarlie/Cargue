@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorador de Archivos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #f5f7fa;
+            --text-color: #333;
+            --folder-color: #f39c12;
+            --file-color: #3498db;
+            --hover-color: #ecf0f1;
+            --border-color: #ddd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            transition: box-shadow 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            border-color: var(--secondary-color);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary-color);
+        }
+
+        .file-explorer {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .folder, .file {
+            padding: 8px 10px;
+            margin: 2px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .folder:hover, .file:hover {
+            background-color: var(--hover-color);
+        }
+
+        .folder {
+            font-weight: 500;
+        }
+
+        .folder-icon, .file-icon {
+            margin-right: 10px;
+            color: var(--folder-color);
+            width: 16px;
+            text-align: center;
+        }
+
+        .file-icon {
+            color: var(--file-color);
+        }
+
+        .folder-content {
+            margin-left: 26px;
+            display: none;
+        }
+
+        .folder.expanded > .folder-content {
+            display: block;
+        }
+
+        .folder.expanded > .folder-icon {
+            color: var(--secondary-color);
+        }
+
+        /* ESTILO PARA LOS PÓSTERS DE VÍDEOS */
+        .poster-icon {
+            margin-right: 10px;
+            width: 40px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            vertical-align: middle;
+        }
+        
+        /* CAMBIO AQUÍ: Evitar que el cursor de "mano" del enlace se propague y afecte a toda la fila */
+        .file a {
+            cursor: pointer;
+        }
+
+        .highlight {
+            background-color: #ffeb3b;
+            font-weight: bold;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #7f8c8d;
+        }
+
+        .breadcrumb {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb-item {
+            cursor: pointer;
+            color: var(--secondary-color);
+            transition: text-decoration 0.2s;
+        }
+
+        .breadcrumb-item:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            margin: 0 8px;
+        }
+
+        .stats {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .search-result-path {
+            font-size: 0.8em;
+            color: #777;
+            margin-left: 26px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-folder-tree"></i> Explorador de Archivos</h1>
+            <p>Navega por la estructura de carpetas y archivos</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar archivos y carpetas...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+
+        <div class="breadcrumb" id="breadcrumb">
+            <span class="breadcrumb-item" data-path="">Inicio</span>
+        </div>
+
+        <div class="file-explorer" id="fileExplorer">
+            <div class="no-results">Cargando estructura de archivos...</div>
+        </div>
+
+        <div class="stats" id="stats">
+            <div><i class="fas fa-info-circle"></i> <span id="statsInfo">Cargando estadísticas...</span></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let fileStructure = null;
+            let currentPath = [];
+            let searchResults = [];
+            let isSearchMode = false;
+
+            // Cargar la estructura de archivos desde el JSON
+            fetch('directory_structure.json?v=' + new Date().getTime())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    fileStructure = data;
+                    renderExplorer();
+                    updateStats();
+                })
+                .catch(error => {
+                    console.error('Error al cargar la estructura de archivos:', error);
+                    const explorer = document.getElementById('fileExplorer');
+                    explorer.innerHTML = `
+                        <div class="no-results">
+                            <p><strong>Error al cargar los datos.</strong></p>
+                            <p>Asegúrate de que el archivo <code>directory_structure.json</code> esté en la misma carpeta que este HTML y que el contenido sea correcto.</p>
+                            <p>Detalles del error: ${error.message}</p>
+                        </div>`;
+                });
+
+            function renderExplorer() {
+                const explorer = document.getElementById('fileExplorer');
+                explorer.innerHTML = '';
+
+                if (isSearchMode) {
+                    renderSearchResults(explorer);
+                } else {
+                    const currentFolder = getCurrentFolder();
+                    renderFolder(currentFolder, explorer, 0);
+                }
+
+                updateBreadcrumb();
+            }
+
+            function getCurrentFolder() {
+                let current = fileStructure;
+                for (const folderName of currentPath) {
+                    const found = current.children.find(item => 
+                        item.type === 'folder' && item.name === folderName
+                    );
+                    if (found) {
+                        current = found;
+                    } else {
+                        currentPath = [];
+                        current = fileStructure;
+                        break;
+                    }
+                }
+                return current;
+            }
+
+            function renderFolder(folder, container) {
+                if (!folder.children) return;
+
+                const sortedChildren = [...folder.children].sort((a, b) => {
+                    if (a.type === 'folder' && b.type === 'file') return -1;
+                    if (a.type === 'file' && b.type === 'folder') return 1;
+                    return a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
+                });
+
+                sortedChildren.forEach(item => {
+                    const element = document.createElement('div');
+                    element.className = item.type;
+
+                    if (item.type === 'folder') {
+                        element.innerHTML = `
+                            <i class="fas fa-folder folder-icon"></i>
+                            <span>${highlightText(item.name)}</span>
+                            <div class="folder-content"></div>
+                        `;
+                        const contentDiv = element.querySelector('.folder-content');
+                        renderFolder(item, contentDiv);
+
+                        element.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            currentPath.push(item.name);
+                            renderExplorer();
+                        });
+                    } else {
+                        let iconHtml = '';
+                        const isMovie = item.name.toLowerCase().match(/\.(mp4|mkv|avi|mov|wmv|flv)$/);
+
+                        if (isMovie && item.poster) {
+                            // CAMBIO AQUÍ: Se añade loading="lazy" para que la imagen no se cargue hasta ser visible
+                            iconHtml = `<a href="${item.poster}" target="_blank" title="Haz clic para ver el póster a tamaño completo"><img src="${item.poster}" loading="lazy" alt="Poster" class="poster-icon"></a>`;
+                        } else {
+                            iconHtml = `<i class="fas fa-file file-icon"></i>`;
+                        }
+
+                        element.innerHTML = `
+                            ${iconHtml}
+                            <span>${highlightText(item.name)}</span>
+                        `;
+                    }
+
+                    container.appendChild(element);
+                });
+            }
+
+            function renderSearchResults(container) {
+                if (searchResults.length === 0) {
+                    container.innerHTML = '<div class="no-results">No se encontraron resultados para tu búsqueda.</div>';
+                    return;
+                }
+
+                const resultHeader = document.createElement('div');
+                resultHeader.innerHTML = `<h3>Resultados de búsqueda (${searchResults.length})</h3>`;
+                container.appendChild(resultHeader);
+
+                searchResults.forEach(result => {
+                    const element = document.createElement('div');
+                    element.className = result.item.type;
+
+                    if (result.item.type === 'folder') {
+                        element.innerHTML = `
+                            <i class="fas fa-folder folder-icon"></i>
+                            <span>${highlightText(result.item.name)}</span>
+                            <div class="search-result-path">${result.path}</div>
+                        `;
+                        element.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            currentPath = result.path.split('/').filter(p => p);
+                            isSearchMode = false;
+                            document.getElementById('searchInput').value = '';
+                            renderExplorer();
+                        });
+                    } else {
+                        let iconHtml = '';
+                        const isMovie = result.item.name.toLowerCase().match(/\.(mp4|mkv|avi|mov|wmv|flv)$/);
+                        if (isMovie && result.item.poster) {
+                            // CAMBIO AQUÍ: También aplicamos el mismo cambio a los resultados de búsqueda
+                            iconHtml = `<a href="${result.item.poster}" target="_blank" title="Haz clic para ver el póster a tamaño completo"><img src="${result.item.poster}" loading="lazy" alt="Poster" class="poster-icon"></a>`;
+                        } else {
+                            iconHtml = `<i class="fas fa-file file-icon"></i>`;
+                        }
+
+                        element.innerHTML = `
+                            ${iconHtml}
+                            <span>${highlightText(result.item.name)}</span>
+                            <div class="search-result-path">${result.path}</div>
+                        `;
+                    }
+
+                    container.appendChild(element);
+                });
+            }
+
+            function highlightText(text) {
+                const searchTerm = document.getElementById('searchInput').value.trim();
+                if (!searchTerm || !isSearchMode) return text;
+
+                const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                return text.replace(regex, '<span class="highlight">$1</span>');
+            }
+
+            function updateBreadcrumb() {
+                const breadcrumb = document.getElementById('breadcrumb');
+                breadcrumb.innerHTML = '';
+
+                const homeItem = document.createElement('span');
+                homeItem.className = 'breadcrumb-item';
+                homeItem.textContent = fileStructure ? fileStructure.name : 'Inicio';
+                homeItem.addEventListener('click', function() {
+                    currentPath = [];
+                    renderExplorer();
+                });
+                breadcrumb.appendChild(homeItem);
+
+                currentPath.forEach((folderName, index) => {
+                    const separator = document.createElement('span');
+                    separator.className = 'breadcrumb-separator';
+                    separator.textContent = ' / ';
+                    breadcrumb.appendChild(separator);
+
+                    const item = document.createElement('span');
+                    item.className = 'breadcrumb-item';
+                    item.textContent = folderName;
+                    item.addEventListener('click', function() {
+                        currentPath = currentPath.slice(0, index + 1);
+                        renderExplorer();
+                    });
+                    breadcrumb.appendChild(item);
+                });
+            }
+
+            function searchInStructure(query) {
+                if (!query) {
+                    isSearchMode = false;
+                    renderExplorer();
+                    return;
+                }
+
+                isSearchMode = true;
+                searchResults = [];
+                const searchTerm = query.toLowerCase();
+
+                function searchRecursive(items, path = '') {
+                    items.forEach(item => {
+                        const itemPath = path ? `${path}/${item.name}` : item.name;
+                        
+                        if (item.name.toLowerCase().includes(searchTerm)) {
+                            searchResults.push({
+                                item: item,
+                                path: path
+                            });
+                        }
+
+                        if (item.children) {
+                            searchRecursive(item.children, itemPath);
+                        }
+                    });
+                }
+
+                if (fileStructure && fileStructure.children) {
+                    searchRecursive(fileStructure.children);
+                }
+                renderExplorer();
+            }
+
+            function updateStats() {
+                let folderCount = 0;
+                let fileCount = 0;
+
+                function countRecursive(items) {
+                    if (!items) return;
+                    items.forEach(item => {
+                        if (item.type === 'folder') {
+                            folderCount++;
+                            if (item.children) {
+                                countRecursive(item.children);
+                            }
+                        } else {
+                            fileCount++;
+                        }
+                    });
+                }
+
+                if (fileStructure && fileStructure.children) {
+                    countRecursive(fileStructure.children);
+                }
+
+                document.getElementById('statsInfo').textContent = 
+                    `Total: ${folderCount} carpetas, ${fileCount} archivos`;
+            }
+
+            document.getElementById('searchInput').addEventListener('input', function(e) {
+                searchInStructure(e.target.value);
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && isSearchMode) {
+                    isSearchMode = false;
+                    document.getElementById('searchInput').value = '';
+                    renderExplorer();
+                } else if (e.key === 'Backspace' && !isSearchMode && currentPath.length > 0 && 
+                          document.activeElement !== document.getElementById('searchInput')) {
+                    currentPath.pop();
+                    renderExplorer();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
