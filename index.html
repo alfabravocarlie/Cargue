@@ -47,11 +47,20 @@
             border-radius: 8px;
             margin-bottom: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         h1 {
             font-size: 2rem;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin: 0;
         }
 
         .search-container {
@@ -147,11 +156,83 @@
             border-radius: 4px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.2);
             vertical-align: middle;
+            cursor: zoom-in; /* Indica que se puede ampliar */
+            transition: transform 0.2s;
         }
         
-        /* CAMBIO AQUÍ: Evitar que el cursor de "mano" del enlace se propague y afecte a toda la fila */
+        .poster-icon:hover {
+            transform: scale(1.05);
+        }
+
         .file a {
             cursor: pointer;
+        }
+
+        /* --- ESTILOS MODAL (VISOR DE IMÁGENES) --- */
+        .modal {
+            display: none; /* Oculto por defecto */
+            position: fixed; 
+            z-index: 3000; /* Por encima de todo */
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.9); /* Fondo negro oscuro */
+            backdrop-filter: blur(5px);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Contenido de la imagen dentro del modal */
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            animation-name: zoom;
+            animation-duration: 0.2s;
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0.8)} 
+            to {transform:scale(1)}
+        }
+
+        /* Botón de cerrar */
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 3001;
+        }
+
+        .close-modal:hover,
+        .close-modal:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Media query para móviles */
+        @media only screen and (max-width: 700px){
+            .modal-content {
+                width: 100%;
+                max-height: 85vh;
+            }
+            .close-modal {
+                right: 15px;
+                top: 10px;
+                font-size: 35px;
+            }
         }
 
         .highlight {
@@ -205,7 +286,6 @@
             margin-left: 26px;
         }
         
-        /* Indicador de recarga */
         .refresh-indicator {
             position: fixed;
             top: 10px;
@@ -218,9 +298,35 @@
             z-index: 1000;
             display: none;
         }
+
+        .btn-manual-load {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-manual-load:hover {
+            background-color: #2980b9;
+        }
+        .btn-manual-load i {
+            font-size: 1.2rem;
+        }
     </style>
 </head>
 <body>
+    <!-- MODAL PARA VISUALIZAR IMÁGENES -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
     <!-- Indicador de recarga -->
     <div class="refresh-indicator" id="refreshIndicator">
         <i class="fas fa-sync-alt fa-spin"></i> Actualizando datos...
@@ -228,8 +334,10 @@
 
     <div class="container">
         <header>
-            <h1><i class="fas fa-folder-tree"></i> Explorador de Archivos</h1>
-            <p>Navega por la estructura de carpetas y archivos</p>
+            <div>
+                <h1><i class="fas fa-folder-tree"></i> Explorador de Archivos</h1>
+                <p>Navega por la estructura de carpetas y archivos</p>
+            </div>
         </header>
 
         <div class="search-container">
@@ -250,6 +358,9 @@
         </div>
     </div>
 
+    <!-- Input oculto para seleccionar el archivo -->
+    <input type="file" id="jsonFileInput" accept=".json" style="display: none;">
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             let fileStructure = null;
@@ -257,51 +368,95 @@
             let searchResults = [];
             let isSearchMode = false;
             
-            // Mostrar indicador de recarga
             const refreshIndicator = document.getElementById('refreshIndicator');
+            const jsonFileInput = document.getElementById('jsonFileInput');
+            const explorer = document.getElementById('fileExplorer');
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImage");
+
+            // --- FUNCIONES DEL MODAL ---
+            function openModal(src) {
+                modal.style.display = "flex";
+                modalImg.src = src;
+                document.body.style.overflow = "hidden"; // Evita scroll de fondo
+            }
+
+            function closeModal() {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto"; // Reactiva scroll
+                modalImg.src = "";
+            }
+
+            // Cerrar al hacer clic fuera de la imagen
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    closeModal();
+                }
+            }
+            
+            // --- LÓGICA PRINCIPAL ---
+
+            function processData(data) {
+                fileStructure = data;
+                renderExplorer();
+                updateStats();
+                setTimeout(() => {
+                    refreshIndicator.style.display = 'none';
+                }, 500);
+            }
+
+            function showError(message) {
+                explorer.innerHTML = `
+                    <div class="no-results">
+                        <p><strong>Error al cargar los datos.</strong></p>
+                        <p>${message}</p>
+                        <p>Esto suele pasar por restricciones de seguridad del navegador al abrir archivos locales.</p>
+                        <button class="btn-manual-load" onclick="document.getElementById('jsonFileInput').click()">
+                            <i class="fas fa-file-upload"></i> Seleccionar 'directory_structure.json' manualmente
+                        </button>
+                    </div>`;
+                refreshIndicator.style.display = 'none';
+            }
+
             refreshIndicator.style.display = 'block';
             
-            // Verificar si la página se está cargando desde el caché del navegador
-            window.addEventListener('pageshow', function(event) {
-                // Si event.persisted es true, significa que la página se cargó desde el caché
-                if (event.persisted) {
-                    // Forzar una recarga completa
-                    window.location.reload();
-                }
-            });
-
-            // Cargar la estructura de archivos desde el JSON
             fetch('directory_structure.json?v=' + new Date().getTime())
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                     return response.json();
                 })
                 .then(data => {
-                    fileStructure = data;
-                    renderExplorer();
-                    updateStats();
-                    // Ocultar indicador de recarga
-                    setTimeout(() => {
-                        refreshIndicator.style.display = 'none';
-                    }, 500);
+                    processData(data);
                 })
                 .catch(error => {
-                    console.error('Error al cargar la estructura de archivos:', error);
-                    const explorer = document.getElementById('fileExplorer');
-                    explorer.innerHTML = `
-                        <div class="no-results">
-                            <p><strong>Error al cargar los datos.</strong></p>
-                            <p>Asegúrate de que el archivo <code>directory_structure.json</code> esté en la misma carpeta que este HTML y que el contenido sea correcto.</p>
-                            <p>Detalles del error: ${error.message}</p>
-                        </div>`;
-                    // Ocultar indicador de recarga
-                    refreshIndicator.style.display = 'none';
+                    console.warn('No se pudo cargar automáticamente:', error);
+                    showError("No se pudo conectar con el archivo JSON automáticamente.");
                 });
 
+            jsonFileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                refreshIndicator.style.display = 'block';
+                explorer.innerHTML = '<div class="no-results">Leyendo archivo...</div>';
+
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        processData(data);
+                    } catch (parseError) {
+                        showError("El archivo seleccionado no es un JSON válido.");
+                        console.error(parseError);
+                    }
+                };
+                reader.onerror = function() {
+                    showError("Error al leer el archivo.");
+                };
+                reader.readAsText(file);
+            });
+
             function renderExplorer() {
-                const explorer = document.getElementById('fileExplorer');
                 explorer.innerHTML = '';
 
                 if (isSearchMode) {
@@ -363,8 +518,8 @@
                         const isMovie = item.name.toLowerCase().match(/\.(mp4|mkv|avi|mov|wmv|flv)$/);
 
                         if (isMovie && item.poster) {
-                            // CAMBIO AQUÍ: Se añade loading="lazy" para que la imagen no se cargue hasta ser visible
-                            iconHtml = `<a href="${item.poster}" target="_blank" title="Haz clic para ver el póster a tamaño completo"><img src="${item.poster}" loading="lazy" alt="Poster" class="poster-icon"></a>`;
+                            // CAMBIO AQUÍ: Ahora es un img directo con onclick en lugar de un <a>
+                            iconHtml = `<img src="${item.poster}" loading="lazy" alt="Poster" class="poster-icon" onclick="openModal('${item.poster}')">`;
                         } else {
                             iconHtml = `<i class="fas fa-file file-icon"></i>`;
                         }
@@ -410,8 +565,8 @@
                         let iconHtml = '';
                         const isMovie = result.item.name.toLowerCase().match(/\.(mp4|mkv|avi|mov|wmv|flv)$/);
                         if (isMovie && result.item.poster) {
-                            // CAMBIO AQUÍ: También aplicamos el mismo cambio a los resultados de búsqueda
-                            iconHtml = `<a href="${result.item.poster}" target="_blank" title="Haz clic para ver el póster a tamaño completo"><img src="${result.item.poster}" loading="lazy" alt="Poster" class="poster-icon"></a>`;
+                            // CAMBIO AQUÍ: También aplicamos el cambio a los resultados de búsqueda
+                            iconHtml = `<img src="${result.item.poster}" loading="lazy" alt="Poster" class="poster-icon" onclick="openModal('${result.item.poster}')">`;
                         } else {
                             iconHtml = `<i class="fas fa-file file-icon"></i>`;
                         }
@@ -534,6 +689,9 @@
                     isSearchMode = false;
                     document.getElementById('searchInput').value = '';
                     renderExplorer();
+                } else if (e.key === 'Escape' && modal.style.display === 'flex') {
+                    // Permitir cerrar el modal con ESC
+                    closeModal();
                 } else if (e.key === 'Backspace' && !isSearchMode && currentPath.length > 0 && 
                           document.activeElement !== document.getElementById('searchInput')) {
                     currentPath.pop();
@@ -541,6 +699,23 @@
                 }
             });
         });
+
+        // Hacer openModal y closeModal globales para que funcionen con los onclicks insertados dinámicamente
+        function openModal(src) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImage");
+            modal.style.display = "flex";
+            modalImg.src = src;
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImage");
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+            modalImg.src = "";
+        }
     </script>
 </body>
 </html>
