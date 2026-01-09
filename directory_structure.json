@@ -34500,9 +34500,723 @@
           "children": []
         },
         {
+          "name": "Doramas",
+          "type": "folder",
+          "children": [
+            {
+              "name": "Adonis, flor de invierno",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Adonis, flor de invierno [Cap-1] [06-01-2026].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Adonis, flor de invierno [Cap-2] [06-01-2026].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Adonis, flor de invierno [Cap-3] [06-01-2026].mp4",
+                  "type": "file"
+                }
+              ]
+            },
+            {
+              "name": "Amor de mentira [Dorama] [12 Cap. FDT]",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Amor de mentira cap-01 [2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Amor de mentira cap-02 [2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Amor de mentira cap-03 [2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Amor de mentira cap-04 [2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Amor de mentira cap-05 [2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Amor de mentira cap-06 [2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Amor de mentira cap-07 [2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Amor de mentira cap-08 [2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Amor de mentira cap-09 [2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Amor de mentira cap-10 [2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Amor de mentira cap-11 [2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Amor de mentira cap-12 [2025].mp4",
+                  "type": "file"
+                }
+              ]
+            },
+            {
+              "name": "El genio de los deseos",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "El genio y los deseos [Cap-10] [07-01-2026].ts",
+                  "type": "file"
+                },
+                {
+                  "name": "El genio y los deseos [Cap-1] [24-12-2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "El genio y los deseos [Cap-2] [24-12-2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "El genio y los deseos [Cap-3] [24-12-2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "El genio y los deseos [Cap-4] [24-12-2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "El genio y los deseos [Cap-5] [24-12-2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "El genio y los deseos [Cap-6] [07-01-2026].ts",
+                  "type": "file"
+                },
+                {
+                  "name": "El genio y los deseos [Cap-7] [07-01-2026].ts",
+                  "type": "file"
+                },
+                {
+                  "name": "El genio y los deseos [Cap-8] [07-01-2026].ts",
+                  "type": "file"
+                },
+                {
+                  "name": "El genio y los deseos [Cap-9] [07-01-2026].ts",
+                  "type": "file"
+                }
+              ]
+            },
+            {
+              "name": "Un beso con chispa",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Un beso con chispa [Cap-1] [24-12-2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Un beso con chispa [Cap-2] [24-12-2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Un beso con chispa [Cap-3] [24-12-2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Un beso con chispa [Cap-4] [24-12-2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Un beso con chispa [Cap-5] [24-12-2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Un beso con chispa [Cap-6] [24-12-2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Un beso con chispa [Cap-7] [24-12-2025].mp4",
+                  "type": "file"
+                },
+                {
+                  "name": "Un beso con chispa [Cap-8] [24-12-2025].mp4",
+                  "type": "file"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "Mexicanas",
           "type": "folder",
           "children": [
+            {
+              "name": "Reina Del Sur (INGLES)",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Queen of the South - [Temp 2]",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Queen Of The South - 2x06.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen Of The South - 2x06.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x01.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x01.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x02.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x02.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x03.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x03.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x04.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x04.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x05.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x05.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x07.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x07.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x08.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x08.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x09.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x10.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x10.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x11.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x12.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x13.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 2x13.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South.jpg",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the south - 2x09.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the south - 2x11.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "cover.jpg",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "Queen of the South - [Temp 3]",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Queen Of The South 3x06 subt.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x01.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x01.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x02.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x02.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x03 - Reina de oros (Español (Latinoamérica)).mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x03 - Reina de oros (Español (Latinoamérica)).srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x04.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x04.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x05.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x05.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x06.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x06.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x07.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x07.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x08.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x08.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x09.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x09.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x10.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x10.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x11.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x11.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x12 - Justicia (Español (Latinoamérica)).mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x12 - Justicia (Español (Latinoamérica)).srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x13.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South 3x13.srt",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "Queen of the South - [Temp 5]",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Queen Of The South - 5x06.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen Of The South - 5x06.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen Of The South - 5x09.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen Of The South - 5x09.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 5x01.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 5x01.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 5x04.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 5x04.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 5x05.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 5x05.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 5x10.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 5x10.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South.pdf",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the south - 5x02.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the south - 5x02.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the south - 5x03.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the south - 5x03.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the south - 5x07.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the south - 5x07.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the south - 5x08.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the south - 5x08.srt",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "Queen of the south - [Temp 1]",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "2016-10-20_151137.jpg",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E01.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E01.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E02.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E02.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E03.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E03.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E04.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E04.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E05.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E05.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E06.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E06.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E07.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E07.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E08.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E08.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E09.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E09.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E10.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E10.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E11.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E11.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E12.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E12.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E13.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South S01E13.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South.pdf",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "Queen of the south - [Temp 4]",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Queen Of The South - 4x06 subt.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen Of The South - 4x09.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen Of The South - 4x09.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x02.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x02.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x03.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x03.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x04.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x04.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x05 SUBT.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x05.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x05.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x07.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x07.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x11.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x11.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x12.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x12.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x13.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x13.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x8.mp4",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the South - 4x8.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the south - 4x01.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the south - 4x01.srt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the south - 4x10.mkv",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Queen of the south - 4x10.srt",
+                      "type": "file"
+                    }
+                  ]
+                }
+              ]
+            },
             {
               "name": "[Estreno] El Señor de los Cielos (Dinastia Casillas) (Temporada 10) [Mexico]",
               "type": "folder",
