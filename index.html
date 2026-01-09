@@ -7,222 +7,394 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Explorador de Archivos Fácil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #f1c40f; 
-            --background-color: #f5f7fa;
-            --text-color: #333;
-            --folder-color: #f39c12;
+            --primary-color: #4a6fa5;
+            --secondary-color: #16a085;
+            --accent-color: #f39c12; /* Naranja para resaltar */
+            --background-color: #f0f4f8;
+            --text-color: #2c3e50;
+            --folder-color: #e67e22;
             --file-color: #3498db;
-            --hover-color: #ecf0f1;
-            --border-color: #ddd;
+            --hover-color: #e1e8ed;
+            --border-color: #cbd5e0;
+            --success-color: #27ae60;
+            --radius-xl: 16px;
+            --radius-md: 10px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Nunito', sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
+            font-size: 16px;
         }
 
-        /* --- ESTILOS DEL TUTORIAL (MODIFICADOS) --- */
+        /* --- ESTILOS DEL TUTORIAL (FONDO TOTALMENTE TRANSPARENTE) --- */
+        
         .tutorial-active-highlight {
             position: relative;
             z-index: 2900 !important;
-            border: 4px solid var(--secondary-color); /* Borde azul visible */
-            box-shadow: 0 0 20px rgba(52, 152, 219, 0.6); /* Resplandor fuerte */
-            border-radius: 8px;
+            /* Borde grueso naranja muy visible */
+            border: 5px solid var(--accent-color) !important; 
+            border-radius: var(--radius-md);
+            /* Animación para llamar la atención sin bloquear la vista */
+            animation: pulse-border 1.5s infinite;
+            cursor: pointer !important;
             transition: all 0.3s ease;
-            background-color: rgba(255, 255, 255, 0.1); /* Leve brillo sobre el elemento */
         }
 
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(243, 156, 18, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0); }
+        }
+
+        /* Estado completado (Verde) */
+        .tutorial-step-completed {
+            border: 5px solid var(--success-color) !important;
+            box-shadow: 0 0 25px rgba(39, 174, 96, 0.5);
+            animation: none !important;
+        }
+
+        /* CAPA TRANSPARENTE (PNG LIKE) */
         .tutorial-overlay {
             display: none; 
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Fondo muy transparente para que se vea todo clarísimo */
-            background-color: rgba(0, 0, 0, 0.05); 
+            /* CRUCIAL: Fondo totalmente transparente */
+            background-color: transparent !important; 
+            backdrop-filter: none !important;
             z-index: 3000;
-            /* Sin blur */
-            backdrop-filter: none; 
-            /* Permite hacer clic a través del overlay si no tocas la tarjeta */
+            /* Deja pasar los clics */
             pointer-events: none; 
         }
 
+        /* Tarjeta flotante */
         .tutorial-card {
             background-color: white;
-            padding: 25px;
-            border-radius: 12px;
+            padding: 30px;
+            border-radius: 20px;
             width: 90%;
-            max-width: 450px;
+            max-width: 480px;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3); /* Sombra fuerte para separar del fondo */
+            /* Sombra fuerte para que se lea bien sobre el fondo blanco */
+            box-shadow: 0 10px 50px rgba(0,0,0,0.2); 
             position: fixed;
             left: 50%;
             transform: translateX(-50%);
-            pointer-events: auto; /* La tarjeta sí recibe clics */
-            border: 1px solid var(--secondary-color);
-            animation: none; /* Se animará vía JS */
+            border: 1px solid #eee;
+            transition: top 0.4s ease-out, bottom 0.4s ease-out;
+            
+            /* La tarjeta sí recibe clics */
+            pointer-events: auto !important;
         }
 
-        /* Posición superior (para elementos que están abajo) */
-        .pos-top {
-            top: 20px;
-            animation: slideDown 0.4s ease-out;
+        /* Posiciones para mejor visibilidad */
+        .pos-top { 
+            top: 20px; /* Pegado arriba */
+        }
+        .pos-bottom { 
+            bottom: 20px; /* Pegado abajo */
         }
 
-        /* Posición inferior (para elementos que están arriba) */
-        .pos-bottom {
-            bottom: 20px;
-            animation: slideUp 0.4s ease-out;
+        .tutorial-card h2 { 
+            color: var(--primary-color); 
+            margin-bottom: 15px; 
+            font-size: 1.6rem; 
         }
-
-        @keyframes slideDown {
-            from {transform: translate(-50%, -50px); opacity: 0;}
-            to {transform: translate(-50%, 0); opacity: 1;}
-        }
-        @keyframes slideUp {
-            from {transform: translate(-50%, 50px); opacity: 0;}
-            to {transform: translate(-50%, 0); opacity: 1;}
-        }
-
-        .tutorial-card h2 { color: var(--primary-color); margin-bottom: 10px; font-size: 1.4rem; }
-        .tutorial-card p { font-size: 1rem; margin-bottom: 20px; color: #444; }
         
-        .tutorial-controls { display: flex; justify-content: space-between; gap: 10px; }
+        .tutorial-card p { 
+            font-size: 1.15rem; 
+            margin-bottom: 20px; 
+            color: #555; 
+            line-height: 1.5;
+        }
+
+        .instruction-text {
+            font-weight: 800;
+            color: var(--accent-color);
+            font-size: 1.25rem;
+            display: block;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+        
+        .tutorial-controls { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
         
         .btn {
-            padding: 8px 16px; border: none; border-radius: 6px;
-            cursor: pointer; font-size: 0.95rem; font-weight: 600;
-            transition: transform 0.1s, background-color 0.2s;
+            padding: 12px 24px; 
+            border: none; 
+            border-radius: 50px;
+            cursor: pointer; 
+            font-size: 1rem; 
+            font-weight: 700;
+            font-family: 'Nunito', sans-serif;
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s;
+            display: flex; align-items: center; gap: 8px;
         }
         .btn:active { transform: scale(0.95); }
-        .btn-primary { background-color: var(--secondary-color); color: white; }
-        .btn-primary:hover { background-color: #2980b9; }
-        .btn-secondary { background-color: #95a5a6; color: white; }
-        .btn-secondary:hover { background-color: #7f8c8d; }
-        .btn-success { background-color: #27ae60; color: white; }
-        .btn-success:hover { background-color: #219150; }
+        
+        .btn-primary { 
+            background-color: var(--primary-color); 
+            color: white; 
+            box-shadow: 0 4px 10px rgba(74, 111, 165, 0.3);
+        }
+        .btn-primary:hover:not(:disabled) { 
+            background-color: #3b5b8c; 
+            transform: translateY(-2px);
+        }
+        .btn-primary:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            opacity: 0.7;
+            transform: none;
+            box-shadow: none;
+        }
 
-        .tutorial-dots { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
-        .dot { width: 8px; height: 8px; background-color: #ddd; border-radius: 50%; transition: background-color 0.3s; }
-        .dot.active { background-color: var(--secondary-color); }
+        .btn-secondary { 
+            background-color: #ecf0f1; 
+            color: #7f8c8d; 
+        }
+        .btn-secondary:hover { background-color: #dfe6e9; }
+
+        .tutorial-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .dot { 
+            width: 12px; height: 12px; 
+            background-color: #e0e0e0; 
+            border-radius: 50%; 
+            transition: all 0.3s; 
+        }
+        .dot.active { 
+            background-color: var(--accent-color); 
+            transform: scale(1.2);
+        }
 
         /* --- ESTILOS GENERALES --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 25px; }
 
         header {
-            background-color: var(--primary-color); color: white; padding: 20px;
-            border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: flex; justify-content: space-between; align-items: center; position: relative;
+            background: linear-gradient(135deg, var(--primary-color), #2980b9); 
+            color: white; 
+            padding: 25px 30px;
+            border-radius: var(--radius-xl); 
+            margin-bottom: 25px; 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: relative;
         }
 
-        .header-left h1 { font-size: 1.8rem; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
-        header p { font-size: 0.9rem; opacity: 0.8; margin: 0; }
+        .header-left h1 { 
+            font-size: 1.8rem; 
+            margin-bottom: 5px; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+        header p { font-size: 1rem; opacity: 0.9; margin: 0; }
 
         .help-btn {
-            background-color: rgba(255, 255, 255, 0.2); border: 2px solid white;
-            color: white; width: 40px; height: 40px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
-            cursor: pointer; transition: all 0.2s;
+            background-color: rgba(255, 255, 255, 0.2); 
+            border: 2px solid rgba(255,255,255,0.4);
+            color: white; 
+            width: 50px; height: 50px; 
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 1.4rem;
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .help-btn:hover { background-color: white; color: var(--primary-color); transform: rotate(10deg); }
+        .help-btn:hover { 
+            background-color: white; 
+            color: var(--primary-color); 
+            transform: rotate(15deg) scale(1.1); 
+        }
 
-        .search-container { margin-bottom: 20px; position: relative; }
+        .search-container { margin-bottom: 25px; position: relative; }
 
         .search-input {
-            width: 100%; padding: 15px 50px 15px 20px;
-            border: 2px solid var(--border-color); border-radius: 30px;
-            background-color: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            font-size: 1.1rem; transition: all 0.3s;
+            width: 100%; 
+            padding: 18px 60px 18px 25px;
+            border: 2px solid transparent; 
+            border-radius: 50px;
+            background-color: white; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            font-size: 1.1rem; 
+            transition: all 0.3s;
+            color: var(--text-color);
         }
 
         .search-input:focus {
-            outline: none; border-color: var(--secondary-color);
-            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2);
+            outline: none; 
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 6px rgba(22, 160, 133, 0.15);
         }
 
         .search-icon {
-            position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
-            color: var(--secondary-color); font-size: 1.2rem; pointer-events: none;
+            position: absolute; 
+            right: 25px; top: 50%; 
+            transform: translateY(-50%);
+            color: #95a5a6; 
+            font-size: 1.3rem; 
+            pointer-events: none;
+            transition: color 0.3s;
         }
+        .search-input:focus + .search-icon { color: var(--secondary-color); }
 
         .file-explorer {
-            background-color: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            padding: 20px; min-height: 300px; border: 1px solid var(--border-color);
+            background-color: white; 
+            border-radius: var(--radius-xl); 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            padding: 25px; 
+            min-height: 400px; 
+            border: 1px solid var(--border-color);
         }
 
         .folder, .file {
-            padding: 12px 15px; margin: 4px 0; border-radius: 6px;
-            cursor: pointer; display: flex; align-items: center; transition: all 0.2s; font-size: 1.05rem;
+            padding: 15px 20px; 
+            margin: 8px 0; 
+            border-radius: 12px;
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            transition: all 0.2s; 
+            font-size: 1.1rem;
+            border: 1px solid transparent;
         }
 
-        .folder:hover, .file:hover { background-color: var(--hover-color); transform: translateX(5px); }
-        .folder { font-weight: 600; color: var(--primary-color); }
-        .folder-icon, .file-icon { margin-right: 15px; font-size: 1.4rem; }
+        .folder:hover, .file:hover { 
+            background-color: #f8fafc; 
+            transform: translateX(5px); 
+            border-color: #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        
+        .folder { font-weight: 700; color: var(--primary-color); }
+        .folder-icon, .file-icon { margin-right: 18px; font-size: 1.6rem; }
         .folder-icon { color: var(--folder-color); }
         .file-icon { color: var(--file-color); }
 
         .poster-icon {
-            margin-right: 15px; width: 50px; height: 75px; object-fit: cover;
-            border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            cursor: zoom-in; transition: transform 0.2s;
+            margin-right: 18px; 
+            width: 55px; height: 80px; 
+            object-fit: cover;
+            border-radius: 6px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            cursor: zoom-in; 
+            transition: transform 0.3s;
+            background-color: #eee;
         }
-        .poster-icon:hover { transform: scale(1.1); }
+        .poster-icon:hover { transform: scale(1.08); }
 
         .breadcrumb {
-            margin-bottom: 20px; padding: 10px 15px; background-color: #eef2f5;
-            border-radius: 8px; font-size: 1rem; color: #555;
-            display: flex; align-items: center; flex-wrap: wrap; border: 1px solid #ddd;
+            margin-bottom: 25px; 
+            padding: 12px 20px; 
+            background-color: white; 
+            border-radius: 50px;
+            font-size: 1rem; 
+            color: #7f8c8d;
+            display: flex; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
 
         .breadcrumb-item {
-            cursor: pointer; color: var(--secondary-color); font-weight: 600;
-            padding: 2px 5px; border-radius: 4px;
+            cursor: pointer; 
+            color: var(--primary-color); 
+            font-weight: 700;
+            padding: 4px 8px; 
+            border-radius: 8px;
+            transition: background 0.2s;
         }
-        .breadcrumb-item:hover { background-color: rgba(52, 152, 219, 0.1); text-decoration: underline; }
-        .breadcrumb-separator { margin: 0 8px; color: #999; }
+        .breadcrumb-item:hover { background-color: #ebf5fb; color: var(--secondary-color); }
+        .breadcrumb-separator { margin: 0 5px; color: #bdc3c7; }
 
         .modal {
-            display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.9); backdrop-filter: blur(5px);
-            flex-direction: column; justify-content: center; align-items: center;
+            display: none; 
+            position: fixed; 
+            z-index: 4000; 
+            left: 0; top: 0; 
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.92); 
+            backdrop-filter: blur(8px);
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
+        .modal.show { opacity: 1; }
 
         .modal-content {
-            margin: auto; display: block; max-width: 95%; max-height: 90vh;
-            object-fit: contain; box-shadow: 0 0 30px rgba(0,0,0,0.8);
-            border-radius: 4px; animation-name: zoom; animation-duration: 0.2s;
+            margin: auto; 
+            display: block; 
+            max-width: 95%; 
+            max-height: 90vh;
+            object-fit: contain; 
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            border-radius: 8px; 
+            transform: scale(0.9);
+            transition: transform 0.3s;
         }
-        @keyframes zoom { from {transform:scale(0.8); opacity:0;} to {transform:scale(1); opacity:1;} }
+        .modal.show .modal-content { transform: scale(1); }
 
         .close-modal {
-            position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 50px;
-            font-weight: bold; cursor: pointer; z-index: 3001; transition: color 0.3s;
+            position: absolute; top: 30px; right: 40px; 
+            color: white; font-size: 60px;
+            font-weight: bold; cursor: pointer; z-index: 4001; 
+            transition: color 0.3s, transform 0.3s;
+            line-height: 1;
         }
-        .close-modal:hover { color: var(--secondary-color); }
+        .close-modal:hover { color: var(--accent-color); transform: rotate(90deg); }
 
-        .highlight { background-color: #fff3cd; color: #856404; font-weight: bold; padding: 2px 5px; border-radius: 3px; }
-        .no-results { text-align: center; padding: 50px 20px; color: #7f8c8d; font-size: 1.2rem; }
+        .highlight { 
+            background-color: #fff3cd; 
+            color: #d35400; 
+            font-weight: 800; 
+            padding: 0 4px; 
+            border-radius: 4px;
+        }
+        
+        .no-results { 
+            text-align: center; 
+            padding: 60px 20px; 
+            color: #95a5a6; 
+            font-size: 1.3rem;
+        }
+        .no-results i { font-size: 3rem; margin-bottom: 15px; color: #bdc3c7; }
 
         .refresh-indicator {
-            position: fixed; top: 20px; right: 20px; background-color: var(--primary-color);
-            color: white; padding: 10px 20px; border-radius: 30px; font-size: 0.9rem;
-            z-index: 1000; display: none; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            position: fixed; top: 25px; right: 25px; 
+            background-color: var(--primary-color);
+            color: white; padding: 12px 25px; 
+            border-radius: 50px; font-size: 1rem; 
+            z-index: 1000; display: none; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             display: flex; align-items: center; gap: 10px;
+            font-weight: 600;
         }
 
         .btn-manual-load {
-            margin-top: 20px; padding: 12px 25px; background-color: var(--secondary-color);
-            color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1.1rem;
-            display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 25px; padding: 15px 30px; 
+            background-color: var(--secondary-color);
+            color: white; border: none; 
+            border-radius: 50px; cursor: pointer; 
+            font-size: 1.1rem; font-weight: 700;
+            display: inline-flex; align-items: center; gap: 10px; 
+            box-shadow: 0 4px 15px rgba(22, 160, 133, 0.3);
+            transition: transform 0.2s;
         }
-        .btn-manual-load:hover { background-color: #2980b9; transform: translateY(-2px); }
+        .btn-manual-load:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(22, 160, 133, 0.4); }
+
     </style>
 </head>
 <body>
@@ -234,22 +406,28 @@
 
     <!-- OVERLAY TUTORIAL (Transparente) -->
     <div id="tutorialOverlay" class="tutorial-overlay">
-        <!-- La tarjeta se mueve dinámicamente arriba o abajo -->
         <div id="tutorialCard" class="tutorial-card">
             <h2 id="tutorialTitle">Bienvenido</h2>
             <p id="tutorialText">Explicación aquí.</p>
-            
+            <span id="tutorialInstruction" class="instruction-text" style="display:none;"></span>
+
             <div class="tutorial-controls">
-                <button id="btnPrev" class="btn btn-secondary" onclick="tutorial.prev()">Anterior</button>
-                <button id="btnNext" class="btn btn-primary" onclick="tutorial.next()">Siguiente</button>
-                <button id="btnEnd" class="btn btn-success" onclick="tutorial.end()" style="display:none;">¡Entendido!</button>
+                <button id="btnPrev" class="btn btn-secondary" onclick="tutorial.prev()">
+                    <i class="fas fa-arrow-left"></i> Atrás
+                </button>
+                <button id="btnNext" class="btn btn-primary" onclick="tutorial.next()" disabled>
+                    Siguiente <i class="fas fa-arrow-right"></i>
+                </button>
+                <button id="btnEnd" class="btn btn-primary" onclick="tutorial.end()" style="display:none;">
+                    <i class="fas fa-check"></i> ¡Entendido!
+                </button>
             </div>
 
             <div class="tutorial-dots" id="tutorialDots"></div>
             
-            <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-                <label style="font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px;">
-                    <input type="checkbox" id="chkRememberTutorial"> No volver a mostrar esto
+            <div style="margin-top: 25px; border-top: 1px solid #eee; padding-top: 15px;">
+                <label style="font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; color: #777;">
+                    <input type="checkbox" id="chkRememberTutorial"> No volver a mostrar estas instrucciones
                 </label>
             </div>
         </div>
@@ -262,57 +440,68 @@
     <div class="container">
         <header id="headerElement">
             <div class="header-left">
-                <h1><i class="fas fa-folder-tree"></i> Explorador</h1>
-                <p>Tus archivos al alcance de un clic</p>
+                <h1><i class="fas fa-folder-open"></i> Explorador Fácil</h1>
+                <p>Tus archivos ordenados y listos para ver</p>
             </div>
-            <div class="help-btn" onclick="tutorial.start()" title="Necesito ayuda">
+            <div class="help-btn" onclick="tutorial.start()" title="Ayuda">
                 <i class="fas fa-question"></i>
             </div>
         </header>
 
         <div class="search-container" id="searchContainer">
-            <input type="text" id="searchInput" class="search-input" placeholder="Escribe aquí para buscar...">
+            <input type="text" id="searchInput" class="search-input" placeholder="¿Qué estás buscando hoy? Escribe aquí...">
             <i class="fas fa-search search-icon"></i>
         </div>
 
         <div class="breadcrumb" id="breadcrumb">
-            <span class="breadcrumb-item" data-path="">Inicio</span>
+            <span class="breadcrumb-item" data-path=""><i class="fas fa-home"></i> Inicio</span>
         </div>
 
         <div class="file-explorer" id="fileExplorer">
-            <div class="no-results">Cargando archivos...</div>
+            <div class="no-results">
+                <i class="fas fa-spinner fa-spin"></i> Cargando archivos...
+            </div>
         </div>
     </div>
 
     <input type="file" id="jsonFileInput" accept=".json" style="display: none;">
 
     <script>
-        // --- OBJETO TUTORIAL GLOBAL ---
+        // --- SISTEMA DE TUTORIAL ---
         const tutorial = {
             currentStep: 0,
+            stepCompleted: false, 
+            targetClickListener: null, 
+            
             steps: [
                 {
                     target: '#headerElement',
                     title: "¡Hola! Bienvenido",
-                    text: "Este es tu explorador. Piénsalo como un archivador de papel, pero en la pantalla."
+                    text: "Vamos a recorrer la pantalla. Es muy fácil.",
+                    instruction: "Toca la barra azul de arriba."
                 },
                 {
                     target: '#searchContainer',
-                    title: "Buscador Inteligente",
-                    text: "Si buscas una película o documento específico, escribe su nombre aquí."
+                    title: "Buscar Cosas",
+                    text: "Si olvidaste dónde guardaste algo, úsalo.",
+                    instruction: "Toca la barra blanca que dice '¿Qué estás buscando...?'"
                 },
                 {
                     target: '#breadcrumb',
-                    title: "Tu Ubicación",
-                    text: "Esta barra te dice dónde estás. Haz clic en 'Inicio' si quieres volver al principio."
+                    title: "El Mapa",
+                    text: "Esta es tu ubicación. Si te pierdes, toca 'Inicio'.",
+                    instruction: "Toca donde dice Inicio."
                 },
                 {
                     target: '#fileExplorer',
                     title: "Tus Archivos",
-                    text: "Aquí tienes todo. <br><br>📁 <b>Clic</b> en una carpeta para abrirla.<br>🖼️ <b>Clic</b> en una imagen para verla grande."
+                    text: "Aquí está todo. Puedes abrir carpetas o ver pósters.",
+                    instruction: "Toca cualquier lugar dentro de este recuadro blanco."
                 }
             ],
+            
             overlay: null, card: null, titleEl: null, textEl: null, 
+            instructionEl: null,
             btnPrev: null, btnNext: null, btnEnd: null,
             dotsContainer: null, chkRemember: null,
 
@@ -321,6 +510,7 @@
                 this.card = document.getElementById('tutorialCard');
                 this.titleEl = document.getElementById('tutorialTitle');
                 this.textEl = document.getElementById('tutorialText');
+                this.instructionEl = document.getElementById('tutorialInstruction');
                 this.btnPrev = document.getElementById('btnPrev');
                 this.btnNext = document.getElementById('btnNext');
                 this.btnEnd = document.getElementById('btnEnd');
@@ -336,9 +526,9 @@
             },
 
             checkFirstTime: function() {
-                const hasSeenTutorial = localStorage.getItem('tutorialSeen_v2'); // v2 para resetear si es necesario
+                const hasSeenTutorial = localStorage.getItem('tutorialSeen_v4');
                 if (!hasSeenTutorial) {
-                    this.start();
+                    setTimeout(() => this.start(), 1000);
                 }
             },
 
@@ -350,51 +540,106 @@
 
             updateUI: function() {
                 const step = this.steps[this.currentStep];
+                this.stepCompleted = false;
                 
-                // 1. Actualizar Textos
                 this.titleEl.textContent = step.title;
-                this.textEl.innerHTML = step.text;
+                this.textEl.textContent = step.text;
+                this.instructionEl.textContent = step.instruction;
+                this.instructionEl.style.display = 'block';
 
-                // 2. Botones
-                this.btnPrev.style.display = this.currentStep === 0 ? 'none' : 'inline-block';
-                this.btnNext.style.display = this.currentStep === this.steps.length - 1 ? 'none' : 'inline-block';
-                this.btnEnd.style.display = this.currentStep === this.steps.length - 1 ? 'inline-block' : 'none';
+                this.btnPrev.style.display = this.currentStep === 0 ? 'none' : 'inline-flex';
+                this.btnNext.style.display = this.currentStep === this.steps.length - 1 ? 'none' : 'inline-flex';
+                this.btnEnd.style.display = this.currentStep === this.steps.length - 1 ? 'inline-flex' : 'none';
+                
+                this.setNextButtonState(false);
 
-                // 3. Puntos
                 document.querySelectorAll('.dot').forEach((dot, idx) => {
                     dot.classList.toggle('active', idx === this.currentStep);
                 });
 
-                // 4. Resaltar y Posicionar (Lógica Clave)
-                document.querySelectorAll('.tutorial-active-highlight').forEach(el => el.classList.remove('tutorial-active-highlight'));
+                document.querySelectorAll('.tutorial-active-highlight, .tutorial-step-completed').forEach(el => {
+                    el.classList.remove('tutorial-active-highlight', 'tutorial-step-completed');
+                });
+
+                if (this.targetClickListener) {
+                    document.removeEventListener('click', this.targetClickListener, true);
+                }
+
                 const targetEl = document.querySelector(step.target);
-                
-                // Resetear clases de posición
                 this.card.classList.remove('pos-top', 'pos-bottom');
 
                 if (targetEl) {
                     targetEl.classList.add('tutorial-active-highlight');
+                    // Hacemos scroll suave para centrar visualmente
                     targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-                    // Lógica de posición inteligente
-                    // Obtenemos la posición del elemento
+                    // LÓGICA DE POSICIÓN INTELIGENTE
+                    // Obtenemos dónde está el elemento en pantalla
                     const rect = targetEl.getBoundingClientRect();
                     const windowHeight = window.innerHeight;
+                    const cardHeight = this.card.offsetHeight || 250; // Estimado si no se ha renderizado
 
-                    // Si el elemento está en la mitad inferior de la pantalla, ponemos el texto arriba
-                    // Si está en la mitad superior, ponemos el texto abajo
+                    // Si el elemento está en la mitad INFERIOR de la pantalla, ponemos la tarjeta ARRIBA
+                    // para no taparlo.
                     if (rect.top > windowHeight * 0.5) {
                         this.card.classList.add('pos-top');
                     } else {
+                        // Si está en la mitad SUPERIOR, ponemos la tarjeta ABAJO.
                         this.card.classList.add('pos-bottom');
                     }
+
+                    this.targetClickListener = (e) => {
+                        if (targetEl.contains(e.target) || e.target === targetEl) {
+                            this.completeStep(targetEl, e);
+                        }
+                    };
+                    
+                    document.addEventListener('click', this.targetClickListener, true);
+
                 } else {
-                    // Fallback si no encuentra el elemento
                     this.card.classList.add('pos-bottom');
+                    this.setNextButtonState(true);
+                    this.instructionEl.textContent = "No se encontró el elemento, pulsa siguiente.";
+                }
+            },
+
+            completeStep: function(targetEl, originalEvent) {
+                if (this.stepCompleted) return;
+
+                this.stepCompleted = true;
+                
+                targetEl.classList.remove('tutorial-active-highlight');
+                targetEl.classList.add('tutorial-step-completed');
+
+                this.instructionEl.textContent = "¡Correcto! Ahora pulsa el botón.";
+                this.instructionEl.style.color = "var(--success-color)";
+                
+                this.setNextButtonState(true);
+
+                this.card.style.transform = "translate(-50%, 0) scale(1.02)";
+                setTimeout(() => {
+                    this.card.style.transform = "translate(-50%, 0) scale(1)";
+                }, 200);
+            },
+
+            setNextButtonState: function(enabled) {
+                if (enabled) {
+                    this.btnNext.disabled = false;
+                    this.btnNext.style.opacity = "1";
+                    this.btnNext.innerHTML = 'Siguiente <i class="fas fa-arrow-right"></i>';
+                    this.btnEnd.disabled = false;
+                } else {
+                    this.btnNext.disabled = true;
+                    this.btnNext.style.opacity = "0.6";
+                    this.btnNext.innerHTML = '<i class="fas fa-lock"></i> Esperando...';
+                    this.btnEnd.disabled = true;
                 }
             },
 
             next: function() {
+                if (!this.stepCompleted && document.querySelector(this.steps[this.currentStep].target)) {
+                    return; 
+                }
                 if (this.currentStep < this.steps.length - 1) {
                     this.currentStep++;
                     this.updateUI();
@@ -410,10 +655,14 @@
 
             end: function() {
                 this.overlay.style.display = 'none';
-                document.querySelectorAll('.tutorial-active-highlight').forEach(el => el.classList.remove('tutorial-active-highlight'));
+                document.querySelectorAll('.tutorial-step-completed').forEach(el => el.classList.remove('tutorial-step-completed'));
+                
+                if (this.targetClickListener) {
+                    document.removeEventListener('click', this.targetClickListener, true);
+                }
                 
                 if (this.chkRemember.checked) {
-                    localStorage.setItem('tutorialSeen_v2', 'true');
+                    localStorage.setItem('tutorialSeen_v4', 'true');
                 }
             }
         };
@@ -435,14 +684,18 @@
 
             window.openModal = function(src) {
                 modal.style.display = "flex";
+                setTimeout(() => modal.classList.add('show'), 10);
                 modalImg.src = src;
                 document.body.style.overflow = "hidden";
             }
 
             window.closeModal = function() {
-                modal.style.display = "none";
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.style.display = "none";
+                    modalImg.src = "";
+                }, 300);
                 document.body.style.overflow = "auto";
-                modalImg.src = "";
             }
 
             window.onclick = function(event) {
@@ -462,7 +715,8 @@
             function showError(message) {
                 explorer.innerHTML = `
                     <div class="no-results">
-                        <p><strong>Ups, algo salió mal.</strong></p>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p style="margin-top:10px;"><strong>Ups, algo salió mal.</strong></p>
                         <p>${message}</p>
                         <button class="btn-manual-load" onclick="document.getElementById('jsonFileInput').click()">
                             <i class="fas fa-file-upload"></i> Seleccionar archivo
@@ -481,21 +735,36 @@
                 .then(data => processData(data))
                 .catch(error => {
                     console.warn('Error carga automática:', error);
-                    showError("No se encontró el archivo de datos.");
+                    const demoData = {
+                        name: "root",
+                        type: "folder",
+                        children: [
+                            { name: "Fotos de Vacaciones", type: "folder", children: [
+                                { name: "playa.jpg", type: "file", poster: "https://picsum.photos/seed/beach/100/150" },
+                                { name: "montaña.jpg", type: "file", poster: "https://picsum.photos/seed/mountain/100/150" }
+                            ]},
+                            { name: "Documentos Importantes", type: "folder", children: [
+                                { name: "carta.pdf", type: "file" },
+                                { name: "notas.txt", type: "file" }
+                            ]},
+                            { name: "Pelicula Favorita.mkv", type: "file", poster: "https://picsum.photos/seed/movie/100/150" }
+                        ]
+                    };
+                    processData(demoData);
                 });
 
             jsonFileInput.addEventListener('change', function(e) {
                 const file = e.target.files[0];
                 if (!file) return;
                 refreshIndicator.style.display = 'block';
-                explorer.innerHTML = '<div class="no-results">Leyendo archivo...</div>';
+                explorer.innerHTML = '<div class="no-results"><i class="fas fa-spinner fa-spin"></i> Leyendo archivo...</div>';
                 const reader = new FileReader();
                 reader.onload = function(event) {
                     try {
                         const data = JSON.parse(event.target.result);
                         processData(data);
                     } catch (parseError) {
-                        showError("El archivo no es válido.");
+                        showError("El archivo no parece válido.");
                     }
                 };
                 reader.readAsText(file);
@@ -552,6 +821,7 @@
                             <span>${highlightText(item.name)}</span>
                         `;
                         element.addEventListener('click', function(e) {
+                            if (document.getElementById('tutorialOverlay').style.display === 'block') return;
                             e.stopPropagation();
                             currentPath.push(item.name);
                             renderExplorer();
@@ -593,13 +863,15 @@
                     element.innerHTML = `
                         ${iconHtml}
                         <div>
-                            <span>${highlightText(result.item.name)}</span>
-                            <div style="font-size:0.85em; color:#888; margin-top:2px;">Está en: ${result.path}</div>
+                            <span style="font-weight:700;">${highlightText(result.item.name)}</span>
+                            <div style="font-size:0.9em; color:#7f8c8d; margin-top:4px;">Está en: ${result.path}</div>
                         </div>
                     `;
 
                     if (result.item.type === 'folder') {
                         element.addEventListener('click', function(e) {
+                             if (document.getElementById('tutorialOverlay').style.display === 'block') return;
+
                             e.stopPropagation();
                             currentPath = result.path.split('/').filter(p => p);
                             isSearchMode = false;
@@ -624,19 +896,24 @@
                 const homeItem = document.createElement('span');
                 homeItem.className = 'breadcrumb-item';
                 homeItem.innerHTML = '<i class="fas fa-home"></i> Inicio';
-                homeItem.onclick = function() { currentPath = []; renderExplorer(); };
+                homeItem.onclick = function() { 
+                    if (document.getElementById('tutorialOverlay').style.display === 'block') return;
+                    currentPath = []; 
+                    renderExplorer(); 
+                };
                 breadcrumb.appendChild(homeItem);
 
                 currentPath.forEach((folderName, index) => {
                     const separator = document.createElement('span');
                     separator.className = 'breadcrumb-separator';
-                    separator.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                    separator.innerHTML = '<i class="fas fa-chevron-right" style="font-size:0.8em"></i>';
                     breadcrumb.appendChild(separator);
 
                     const item = document.createElement('span');
                     item.className = 'breadcrumb-item';
                     item.textContent = folderName;
                     item.onclick = function() {
+                        if (document.getElementById('tutorialOverlay').style.display === 'block') return;
                         currentPath = currentPath.slice(0, index + 1);
                         renderExplorer();
                     };
