@@ -13,7 +13,7 @@
         :root {
             --primary-color: #4a6fa5;
             --secondary-color: #16a085;
-            --accent-color: #f39c12; /* Naranja para resaltar */
+            --accent-color: #f39c12;
             --background-color: #f0f4f8;
             --text-color: #2c3e50;
             --folder-color: #e67e22;
@@ -35,15 +35,13 @@
             font-size: 16px;
         }
 
-        /* --- ESTILOS DEL TUTORIAL (FONDO TOTALMENTE TRANSPARENTE) --- */
+        /* --- ESTILOS DEL TUTORIAL (RESPONSIVE) --- */
         
         .tutorial-active-highlight {
             position: relative;
             z-index: 2900 !important;
-            /* Borde grueso naranja muy visible */
             border: 5px solid var(--accent-color) !important; 
             border-radius: var(--radius-md);
-            /* Animación para llamar la atención sin bloquear la vista */
             animation: pulse-border 1.5s infinite;
             cursor: pointer !important;
             transition: all 0.3s ease;
@@ -55,88 +53,75 @@
             100% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0); }
         }
 
-        /* Estado completado (Verde) */
         .tutorial-step-completed {
             border: 5px solid var(--success-color) !important;
             box-shadow: 0 0 25px rgba(39, 174, 96, 0.5);
             animation: none !important;
         }
 
-        /* CAPA TRANSPARENTE (PNG LIKE) */
         .tutorial-overlay {
             display: none; 
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* CRUCIAL: Fondo totalmente transparente */
             background-color: transparent !important; 
             backdrop-filter: none !important;
             z-index: 3000;
-            /* Deja pasar los clics */
             pointer-events: none; 
         }
 
-        /* Tarjeta flotante */
         .tutorial-card {
             background-color: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 20px;
             width: 90%;
             max-width: 480px;
             text-align: center;
-            /* Sombra fuerte para que se lea bien sobre el fondo blanco */
             box-shadow: 0 10px 50px rgba(0,0,0,0.2); 
             position: fixed;
             left: 50%;
             transform: translateX(-50%);
             border: 1px solid #eee;
             transition: top 0.4s ease-out, bottom 0.4s ease-out;
-            
-            /* La tarjeta sí recibe clics */
             pointer-events: auto !important;
         }
 
-        /* Posiciones para mejor visibilidad */
-        .pos-top { 
-            top: 20px; /* Pegado arriba */
-        }
-        .pos-bottom { 
-            bottom: 20px; /* Pegado abajo */
-        }
+        .pos-top { top: 20px; }
+        .pos-bottom { bottom: 20px; }
 
         .tutorial-card h2 { 
             color: var(--primary-color); 
-            margin-bottom: 15px; 
-            font-size: 1.6rem; 
+            margin-bottom: 10px; 
+            font-size: 1.5rem; 
         }
         
         .tutorial-card p { 
-            font-size: 1.15rem; 
-            margin-bottom: 20px; 
+            font-size: 1.1rem; 
+            margin-bottom: 15px; 
             color: #555; 
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         .instruction-text {
             font-weight: 800;
             color: var(--accent-color);
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             display: block;
-            margin-top: 10px;
+            margin-top: 8px;
             text-transform: uppercase;
         }
         
-        .tutorial-controls { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
+        .tutorial-controls { display: flex; justify-content: center; gap: 12px; margin-top: 12px; }
         
         .btn {
-            padding: 12px 24px; 
+            padding: 10px 20px; 
             border: none; 
             border-radius: 50px;
             cursor: pointer; 
-            font-size: 1rem; 
+            font-size: 0.95rem; 
             font-weight: 700;
             font-family: 'Nunito', sans-serif;
             transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s;
-            display: flex; align-items: center; gap: 8px;
+            display: flex; align-items: center; gap: 6px;
         }
         .btn:active { transform: scale(0.95); }
         
@@ -163,9 +148,9 @@
         }
         .btn-secondary:hover { background-color: #dfe6e9; }
 
-        .tutorial-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .tutorial-dots { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
         .dot { 
-            width: 12px; height: 12px; 
+            width: 10px; height: 10px; 
             background-color: #e0e0e0; 
             border-radius: 50%; 
             transition: all 0.3s; 
@@ -175,41 +160,78 @@
             transform: scale(1.2);
         }
 
+        /* --- AJUSTE PARA MÓVILES (Pantallas pequeñas) --- */
+        @media (max-width: 600px) {
+            .tutorial-card {
+                padding: 15px; /* Mucho menos espacio en blanco */
+                width: 95%;
+                max-width: 95%;
+                top: 50% !important; /* Intentar centrar si hay espacio */
+                bottom: auto !important;
+                transform: translate(-50%, -50%);
+                position: fixed; /* Asegurar posicionamiento fijo */
+            }
+            
+            /* Sobrescribir posiciones solo si el elemento está muy arriba o abajo */
+            .pos-top { top: 10px !important; transform: translate(-50%, 0) !important; }
+            .pos-bottom { bottom: 10px !important; top: auto !important; transform: translate(-50%, 0) !important; }
+
+            .tutorial-card h2 { font-size: 1.2rem; margin-bottom: 8px; }
+            .tutorial-card p { font-size: 0.95rem; margin-bottom: 10px; }
+            .instruction-text { font-size: 0.9rem; }
+            
+            .btn { 
+                padding: 8px 16px; 
+                font-size: 0.85rem; 
+            }
+            .tutorial-controls { gap: 8px; flex-wrap: wrap; }
+            
+            .tutorial-dots { margin-top: 10px; }
+        }
+
         /* --- ESTILOS GENERALES --- */
-        .container { max-width: 1100px; margin: 0 auto; padding: 25px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; } /* Padding reducido en móvil */
 
         header {
             background: linear-gradient(135deg, var(--primary-color), #2980b9); 
             color: white; 
-            padding: 25px 30px;
+            padding: 20px; 
             border-radius: var(--radius-xl); 
-            margin-bottom: 25px; 
+            margin-bottom: 20px; 
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             display: flex; 
-            justify-content: space-between; 
+            flex-direction: column; /* Header responsive */
             align-items: center; 
-            position: relative;
+            text-align: center;
+            gap: 10px;
+        }
+
+        @media(min-width: 768px) {
+            header { flex-direction: row; text-align: left; }
         }
 
         .header-left h1 { 
-            font-size: 1.8rem; 
+            font-size: 1.5rem; 
             margin-bottom: 5px; 
             display: flex; 
             align-items: center; 
-            gap: 12px; 
+            gap: 10px; 
+            justify-content: center;
         }
-        header p { font-size: 1rem; opacity: 0.9; margin: 0; }
+        @media(min-width: 768px) { .header-left h1 { justify-content: flex-start; font-size: 1.8rem; }}
+
+        header p { font-size: 0.9rem; opacity: 0.9; margin: 0; }
 
         .help-btn {
             background-color: rgba(255, 255, 255, 0.2); 
             border: 2px solid rgba(255,255,255,0.4);
             color: white; 
-            width: 50px; height: 50px; 
+            width: 45px; height: 45px; 
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center; 
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             cursor: pointer; 
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s;
         }
         .help-btn:hover { 
             background-color: white; 
@@ -217,16 +239,16 @@
             transform: rotate(15deg) scale(1.1); 
         }
 
-        .search-container { margin-bottom: 25px; position: relative; }
+        .search-container { margin-bottom: 20px; position: relative; }
 
         .search-input {
             width: 100%; 
-            padding: 18px 60px 18px 25px;
+            padding: 15px 50px 15px 20px; /* Padding un poco menor */
             border: 2px solid transparent; 
             border-radius: 50px;
             background-color: white; 
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            font-size: 1.1rem; 
+            font-size: 1rem; 
             transition: all 0.3s;
             color: var(--text-color);
         }
@@ -239,33 +261,31 @@
 
         .search-icon {
             position: absolute; 
-            right: 25px; top: 50%; 
+            right: 20px; top: 50%; 
             transform: translateY(-50%);
             color: #95a5a6; 
-            font-size: 1.3rem; 
+            font-size: 1.2rem; 
             pointer-events: none;
-            transition: color 0.3s;
         }
-        .search-input:focus + .search-icon { color: var(--secondary-color); }
 
         .file-explorer {
             background-color: white; 
             border-radius: var(--radius-xl); 
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-            padding: 25px; 
-            min-height: 400px; 
+            padding: 15px; 
+            min-height: 300px; 
             border: 1px solid var(--border-color);
         }
 
         .folder, .file {
-            padding: 15px 20px; 
-            margin: 8px 0; 
-            border-radius: 12px;
+            padding: 12px 15px; 
+            margin: 6px 0; 
+            border-radius: 10px;
             cursor: pointer; 
             display: flex; 
             align-items: center; 
             transition: all 0.2s; 
-            font-size: 1.1rem;
+            font-size: 1rem;
             border: 1px solid transparent;
         }
 
@@ -273,49 +293,42 @@
             background-color: #f8fafc; 
             transform: translateX(5px); 
             border-color: #e2e8f0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
         
         .folder { font-weight: 700; color: var(--primary-color); }
-        .folder-icon, .file-icon { margin-right: 18px; font-size: 1.6rem; }
+        .folder-icon, .file-icon { margin-right: 15px; font-size: 1.4rem; }
         .folder-icon { color: var(--folder-color); }
         .file-icon { color: var(--file-color); }
 
         .poster-icon {
-            margin-right: 18px; 
-            width: 55px; height: 80px; 
+            margin-right: 15px; 
+            width: 45px; height: 65px; 
             object-fit: cover;
             border-radius: 6px; 
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
             cursor: zoom-in; 
-            transition: transform 0.3s;
-            background-color: #eee;
         }
-        .poster-icon:hover { transform: scale(1.08); }
 
         .breadcrumb {
-            margin-bottom: 25px; 
-            padding: 12px 20px; 
+            margin-bottom: 20px; 
+            padding: 10px 15px; 
             background-color: white; 
             border-radius: 50px;
-            font-size: 1rem; 
+            font-size: 0.9rem; 
             color: #7f8c8d;
             display: flex; 
             align-items: center; 
             flex-wrap: wrap; 
             border: 1px solid var(--border-color);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
 
         .breadcrumb-item {
             cursor: pointer; 
             color: var(--primary-color); 
             font-weight: 700;
-            padding: 4px 8px; 
-            border-radius: 8px;
-            transition: background 0.2s;
+            padding: 2px 6px; 
+            border-radius: 6px;
         }
-        .breadcrumb-item:hover { background-color: #ebf5fb; color: var(--secondary-color); }
         .breadcrumb-separator { margin: 0 5px; color: #bdc3c7; }
 
         .modal {
@@ -340,60 +353,49 @@
             max-width: 95%; 
             max-height: 90vh;
             object-fit: contain; 
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
             border-radius: 8px; 
-            transform: scale(0.9);
-            transition: transform 0.3s;
         }
-        .modal.show .modal-content { transform: scale(1); }
 
         .close-modal {
-            position: absolute; top: 30px; right: 40px; 
-            color: white; font-size: 60px;
+            position: absolute; top: 20px; right: 30px; 
+            color: white; font-size: 50px;
             font-weight: bold; cursor: pointer; z-index: 4001; 
-            transition: color 0.3s, transform 0.3s;
             line-height: 1;
         }
-        .close-modal:hover { color: var(--accent-color); transform: rotate(90deg); }
 
         .highlight { 
             background-color: #fff3cd; 
             color: #d35400; 
             font-weight: 800; 
-            padding: 0 4px; 
-            border-radius: 4px;
+            padding: 0 2px; 
+            border-radius: 3px;
         }
         
         .no-results { 
             text-align: center; 
-            padding: 60px 20px; 
+            padding: 40px 20px; 
             color: #95a5a6; 
-            font-size: 1.3rem;
+            font-size: 1.1rem;
         }
-        .no-results i { font-size: 3rem; margin-bottom: 15px; color: #bdc3c7; }
 
         .refresh-indicator {
-            position: fixed; top: 25px; right: 25px; 
+            position: fixed; top: 15px; right: 15px; 
             background-color: var(--primary-color);
-            color: white; padding: 12px 25px; 
-            border-radius: 50px; font-size: 1rem; 
+            color: white; padding: 10px 20px; 
+            border-radius: 50px; font-size: 0.9rem; 
             z-index: 1000; display: none; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            display: flex; align-items: center; gap: 10px;
-            font-weight: 600;
+            display: flex; align-items: center; gap: 8px;
         }
 
         .btn-manual-load {
-            margin-top: 25px; padding: 15px 30px; 
+            margin-top: 20px; padding: 12px 25px; 
             background-color: var(--secondary-color);
             color: white; border: none; 
             border-radius: 50px; cursor: pointer; 
-            font-size: 1.1rem; font-weight: 700;
-            display: inline-flex; align-items: center; gap: 10px; 
-            box-shadow: 0 4px 15px rgba(22, 160, 133, 0.3);
-            transition: transform 0.2s;
+            font-size: 1rem; font-weight: 700;
+            display: inline-flex; align-items: center; gap: 8px; 
         }
-        .btn-manual-load:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(22, 160, 133, 0.4); }
 
     </style>
 </head>
@@ -404,7 +406,7 @@
         <img class="modal-content" id="modalImage">
     </div>
 
-    <!-- OVERLAY TUTORIAL (Transparente) -->
+    <!-- OVERLAY TUTORIAL -->
     <div id="tutorialOverlay" class="tutorial-overlay">
         <div id="tutorialCard" class="tutorial-card">
             <h2 id="tutorialTitle">Bienvenido</h2>
@@ -419,29 +421,29 @@
                     Siguiente <i class="fas fa-arrow-right"></i>
                 </button>
                 <button id="btnEnd" class="btn btn-primary" onclick="tutorial.end()" style="display:none;">
-                    <i class="fas fa-check"></i> ¡Entendido!
+                    <i class="fas fa-check"></i> ¡Listo!
                 </button>
             </div>
 
             <div class="tutorial-dots" id="tutorialDots"></div>
             
-            <div style="margin-top: 25px; border-top: 1px solid #eee; padding-top: 15px;">
-                <label style="font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; color: #777;">
-                    <input type="checkbox" id="chkRememberTutorial"> No volver a mostrar estas instrucciones
+            <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+                <label style="font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; color: #777;">
+                    <input type="checkbox" id="chkRememberTutorial"> No volver a mostrar
                 </label>
             </div>
         </div>
     </div>
 
     <div class="refresh-indicator" id="refreshIndicator">
-        <i class="fas fa-sync-alt fa-spin"></i> Actualizando datos...
+        <i class="fas fa-sync-alt fa-spin"></i> Actualizando...
     </div>
 
     <div class="container">
         <header id="headerElement">
             <div class="header-left">
                 <h1><i class="fas fa-folder-open"></i> Explorador Fácil</h1>
-                <p>Tus archivos ordenados y listos para ver</p>
+                <p>Tus archivos ordenados</p>
             </div>
             <div class="help-btn" onclick="tutorial.start()" title="Ayuda">
                 <i class="fas fa-question"></i>
@@ -449,7 +451,7 @@
         </header>
 
         <div class="search-container" id="searchContainer">
-            <input type="text" id="searchInput" class="search-input" placeholder="¿Qué estás buscando hoy? Escribe aquí...">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar...">
             <i class="fas fa-search search-icon"></i>
         </div>
 
@@ -459,7 +461,7 @@
 
         <div class="file-explorer" id="fileExplorer">
             <div class="no-results">
-                <i class="fas fa-spinner fa-spin"></i> Cargando archivos...
+                <i class="fas fa-spinner fa-spin"></i> Cargando...
             </div>
         </div>
     </div>
@@ -476,27 +478,27 @@
             steps: [
                 {
                     target: '#headerElement',
-                    title: "¡Hola! Bienvenido",
-                    text: "Vamos a recorrer la pantalla. Es muy fácil.",
-                    instruction: "Toca la barra azul de arriba."
+                    title: "¡Hola!",
+                    text: "Vamos a ver la pantalla.",
+                    instruction: "Toca la barra azul."
                 },
                 {
                     target: '#searchContainer',
-                    title: "Buscar Cosas",
-                    text: "Si olvidaste dónde guardaste algo, úsalo.",
-                    instruction: "Toca la barra blanca que dice '¿Qué estás buscando...?'"
+                    title: "Buscar",
+                    text: "Para encontrar cosas.",
+                    instruction: "Toca la barra blanca."
                 },
                 {
                     target: '#breadcrumb',
-                    title: "El Mapa",
-                    text: "Esta es tu ubicación. Si te pierdes, toca 'Inicio'.",
+                    title: "Ubicación",
+                    text: "Si te pierdes, toca 'Inicio'.",
                     instruction: "Toca donde dice Inicio."
                 },
                 {
                     target: '#fileExplorer',
-                    title: "Tus Archivos",
-                    text: "Aquí está todo. Puedes abrir carpetas o ver pósters.",
-                    instruction: "Toca cualquier lugar dentro de este recuadro blanco."
+                    title: "Archivos",
+                    text: "Aquí están tus cosas.",
+                    instruction: "Toca una carpeta."
                 }
             ],
             
@@ -526,7 +528,7 @@
             },
 
             checkFirstTime: function() {
-                const hasSeenTutorial = localStorage.getItem('tutorialSeen_v4');
+                const hasSeenTutorial = localStorage.getItem('tutorialSeen_v5');
                 if (!hasSeenTutorial) {
                     setTimeout(() => this.start(), 1000);
                 }
@@ -570,21 +572,18 @@
 
                 if (targetEl) {
                     targetEl.classList.add('tutorial-active-highlight');
-                    // Hacemos scroll suave para centrar visualmente
-                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Scroll suave, pero dejando espacio para el cuadro si es necesario
+                    const isMobile = window.innerWidth <= 600;
+                    const block = isMobile ? 'center' : 'center';
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: block });
 
-                    // LÓGICA DE POSICIÓN INTELIGENTE
-                    // Obtenemos dónde está el elemento en pantalla
+                    // Lógica de posición
                     const rect = targetEl.getBoundingClientRect();
                     const windowHeight = window.innerHeight;
-                    const cardHeight = this.card.offsetHeight || 250; // Estimado si no se ha renderizado
 
-                    // Si el elemento está en la mitad INFERIOR de la pantalla, ponemos la tarjeta ARRIBA
-                    // para no taparlo.
                     if (rect.top > windowHeight * 0.5) {
                         this.card.classList.add('pos-top');
                     } else {
-                        // Si está en la mitad SUPERIOR, ponemos la tarjeta ABAJO.
                         this.card.classList.add('pos-bottom');
                     }
 
@@ -599,7 +598,7 @@
                 } else {
                     this.card.classList.add('pos-bottom');
                     this.setNextButtonState(true);
-                    this.instructionEl.textContent = "No se encontró el elemento, pulsa siguiente.";
+                    this.instructionEl.textContent = "Elemento no encontrado, avanza.";
                 }
             },
 
@@ -615,11 +614,9 @@
                 this.instructionEl.style.color = "var(--success-color)";
                 
                 this.setNextButtonState(true);
-
-                this.card.style.transform = "translate(-50%, 0) scale(1.02)";
-                setTimeout(() => {
-                    this.card.style.transform = "translate(-50%, 0) scale(1)";
-                }, 200);
+                
+                // Vibración en móvil
+                if (navigator.vibrate) navigator.vibrate(50);
             },
 
             setNextButtonState: function(enabled) {
@@ -631,7 +628,7 @@
                 } else {
                     this.btnNext.disabled = true;
                     this.btnNext.style.opacity = "0.6";
-                    this.btnNext.innerHTML = '<i class="fas fa-lock"></i> Esperando...';
+                    this.btnNext.innerHTML = '<i class="fas fa-lock"></i> Toca...';
                     this.btnEnd.disabled = true;
                 }
             },
@@ -662,7 +659,7 @@
                 }
                 
                 if (this.chkRemember.checked) {
-                    localStorage.setItem('tutorialSeen_v4', 'true');
+                    localStorage.setItem('tutorialSeen_v5', 'true');
                 }
             }
         };
@@ -705,24 +702,10 @@
             function processData(data) {
                 fileStructure = data;
                 renderExplorer();
-                updateStats();
                 setTimeout(() => {
                     refreshIndicator.style.display = 'none';
                     tutorial.checkFirstTime();
                 }, 800);
-            }
-
-            function showError(message) {
-                explorer.innerHTML = `
-                    <div class="no-results">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <p style="margin-top:10px;"><strong>Ups, algo salió mal.</strong></p>
-                        <p>${message}</p>
-                        <button class="btn-manual-load" onclick="document.getElementById('jsonFileInput').click()">
-                            <i class="fas fa-file-upload"></i> Seleccionar archivo
-                        </button>
-                    </div>`;
-                refreshIndicator.style.display = 'none';
             }
 
             refreshIndicator.style.display = 'block';
@@ -734,20 +717,19 @@
                 })
                 .then(data => processData(data))
                 .catch(error => {
-                    console.warn('Error carga automática:', error);
+                    // Datos Demo para que funcione sin archivo externo
                     const demoData = {
                         name: "root",
                         type: "folder",
                         children: [
-                            { name: "Fotos de Vacaciones", type: "folder", children: [
+                            { name: "Fotos", type: "folder", children: [
                                 { name: "playa.jpg", type: "file", poster: "https://picsum.photos/seed/beach/100/150" },
                                 { name: "montaña.jpg", type: "file", poster: "https://picsum.photos/seed/mountain/100/150" }
                             ]},
-                            { name: "Documentos Importantes", type: "folder", children: [
-                                { name: "carta.pdf", type: "file" },
-                                { name: "notas.txt", type: "file" }
+                            { name: "Documentos", type: "folder", children: [
+                                { name: "nota.txt", type: "file" }
                             ]},
-                            { name: "Pelicula Favorita.mkv", type: "file", poster: "https://picsum.photos/seed/movie/100/150" }
+                            { name: "Pelicula.mkv", type: "file", poster: "https://picsum.photos/seed/movie/100/150" }
                         ]
                     };
                     processData(demoData);
@@ -756,15 +738,13 @@
             jsonFileInput.addEventListener('change', function(e) {
                 const file = e.target.files[0];
                 if (!file) return;
-                refreshIndicator.style.display = 'block';
-                explorer.innerHTML = '<div class="no-results"><i class="fas fa-spinner fa-spin"></i> Leyendo archivo...</div>';
                 const reader = new FileReader();
                 reader.onload = function(event) {
                     try {
                         const data = JSON.parse(event.target.result);
                         processData(data);
                     } catch (parseError) {
-                        showError("El archivo no parece válido.");
+                        alert("Archivo inválido");
                     }
                 };
                 reader.readAsText(file);
@@ -807,7 +787,7 @@
                 });
 
                 if (sortedChildren.length === 0) {
-                    container.innerHTML = '<div class="no-results">Esta carpeta está vacía.</div>';
+                    container.innerHTML = '<div class="no-results">Vacío</div>';
                     return;
                 }
 
@@ -829,13 +809,11 @@
                     } else {
                         let iconHtml = '';
                         const isMovie = item.name.toLowerCase().match(/\.(mp4|mkv|avi|mov|wmv|flv)$/);
-
                         if (isMovie && item.poster) {
-                            iconHtml = `<img src="${item.poster}" loading="lazy" alt="Ver poster" class="poster-icon" onclick="event.stopPropagation(); openModal('${item.poster}')">`;
+                            iconHtml = `<img src="${item.poster}" loading="lazy" class="poster-icon" onclick="event.stopPropagation(); openModal('${item.poster}')">`;
                         } else {
                             iconHtml = `<i class="fas fa-file file-icon"></i>`;
                         }
-
                         element.innerHTML = `${iconHtml}<span>${highlightText(item.name)}</span>`;
                     }
                     container.appendChild(element);
@@ -844,34 +822,28 @@
 
             function renderSearchResults(container) {
                 if (searchResults.length === 0) {
-                    container.innerHTML = '<div class="no-results">No encontramos nada con ese nombre.</div>';
+                    container.innerHTML = '<div class="no-results">Nada</div>';
                     return;
                 }
-
                 searchResults.forEach(result => {
                     const element = document.createElement('div');
                     element.className = result.item.type;
-                    
                     let iconHtml = result.item.type === 'folder' 
                         ? '<i class="fas fa-folder folder-icon"></i>'
                         : '<i class="fas fa-file file-icon"></i>';
-                    
                     if (result.item.type === 'file' && result.item.poster) {
-                        iconHtml = `<img src="${result.item.poster}" loading="lazy" alt="Poster" class="poster-icon" onclick="event.stopPropagation(); openModal('${result.item.poster}')">`;
+                        iconHtml = `<img src="${result.item.poster}" loading="lazy" class="poster-icon" onclick="event.stopPropagation(); openModal('${result.item.poster}')">`;
                     }
-
                     element.innerHTML = `
                         ${iconHtml}
                         <div>
                             <span style="font-weight:700;">${highlightText(result.item.name)}</span>
-                            <div style="font-size:0.9em; color:#7f8c8d; margin-top:4px;">Está en: ${result.path}</div>
+                            <div style="font-size:0.8em; color:#7f8c8d;">${result.path}</div>
                         </div>
                     `;
-
                     if (result.item.type === 'folder') {
                         element.addEventListener('click', function(e) {
                              if (document.getElementById('tutorialOverlay').style.display === 'block') return;
-
                             e.stopPropagation();
                             currentPath = result.path.split('/').filter(p => p);
                             isSearchMode = false;
@@ -945,10 +917,6 @@
                     searchRecursive(fileStructure.children);
                 }
                 renderExplorer();
-            }
-
-            function updateStats() {
-                // Placeholder
             }
 
             document.getElementById('searchInput').addEventListener('input', function(e) {
