@@ -6,7 +6,8 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Explorador de Archivos Fácil</title>
+    <!-- CAMBIO 1: Título actualizado -->
+    <title>Explorador de Archivos Local</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -160,37 +161,29 @@
             transform: scale(1.2);
         }
 
-        /* --- AJUSTE PARA MÓVILES (Pantallas pequeñas) --- */
+        /* --- AJUSTE PARA MÓVILES --- */
         @media (max-width: 600px) {
             .tutorial-card {
-                padding: 15px; /* Mucho menos espacio en blanco */
+                padding: 15px;
                 width: 95%;
                 max-width: 95%;
-                top: 50% !important; /* Intentar centrar si hay espacio */
+                top: 50% !important;
                 bottom: auto !important;
                 transform: translate(-50%, -50%);
-                position: fixed; /* Asegurar posicionamiento fijo */
+                position: fixed;
             }
-            
-            /* Sobrescribir posiciones solo si el elemento está muy arriba o abajo */
             .pos-top { top: 10px !important; transform: translate(-50%, 0) !important; }
             .pos-bottom { bottom: 10px !important; top: auto !important; transform: translate(-50%, 0) !important; }
-
             .tutorial-card h2 { font-size: 1.2rem; margin-bottom: 8px; }
             .tutorial-card p { font-size: 0.95rem; margin-bottom: 10px; }
             .instruction-text { font-size: 0.9rem; }
-            
-            .btn { 
-                padding: 8px 16px; 
-                font-size: 0.85rem; 
-            }
+            .btn { padding: 8px 16px; font-size: 0.85rem; }
             .tutorial-controls { gap: 8px; flex-wrap: wrap; }
-            
             .tutorial-dots { margin-top: 10px; }
         }
 
         /* --- ESTILOS GENERALES --- */
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; } /* Padding reducido en móvil */
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
 
         header {
             background: linear-gradient(135deg, var(--primary-color), #2980b9); 
@@ -200,7 +193,7 @@
             margin-bottom: 20px; 
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             display: flex; 
-            flex-direction: column; /* Header responsive */
+            flex-direction: column; 
             align-items: center; 
             text-align: center;
             gap: 10px;
@@ -243,7 +236,7 @@
 
         .search-input {
             width: 100%; 
-            padding: 15px 50px 15px 20px; /* Padding un poco menor */
+            padding: 15px 50px 15px 20px; 
             border: 2px solid transparent; 
             border-radius: 50px;
             background-color: white; 
@@ -442,8 +435,8 @@
     <div class="container">
         <header id="headerElement">
             <div class="header-left">
-                <h1><i class="fas fa-folder-open"></i> Explorador Fácil</h1>
-                <p>Tus archivos ordenados</p>
+                <h1><i class="fas fa-folder-open"></i> Explorador Local</h1>
+                <p>Tus archivos ordenados (Offline)</p>
             </div>
             <div class="help-btn" onclick="tutorial.start()" title="Ayuda">
                 <i class="fas fa-question"></i>
@@ -466,6 +459,7 @@
         </div>
     </div>
 
+    <!-- Input para cargar JSON manualmente si falla el fetch automático -->
     <input type="file" id="jsonFileInput" accept=".json" style="display: none;">
 
     <script>
@@ -572,12 +566,10 @@
 
                 if (targetEl) {
                     targetEl.classList.add('tutorial-active-highlight');
-                    // Scroll suave, pero dejando espacio para el cuadro si es necesario
                     const isMobile = window.innerWidth <= 600;
                     const block = isMobile ? 'center' : 'center';
                     targetEl.scrollIntoView({ behavior: 'smooth', block: block });
 
-                    // Lógica de posición
                     const rect = targetEl.getBoundingClientRect();
                     const windowHeight = window.innerHeight;
 
@@ -615,7 +607,6 @@
                 
                 this.setNextButtonState(true);
                 
-                // Vibración en móvil
                 if (navigator.vibrate) navigator.vibrate(50);
             },
 
@@ -710,14 +701,18 @@
 
             refreshIndicator.style.display = 'block';
             
-            fetch('directory_structure.json?v=' + new Date().getTime())
+            // CAMBIO IMPORTANTE: Ahora carga 'directory_structure_local.json'
+            fetch('directory_structure_local.json?v=' + new Date().getTime())
                 .then(response => {
                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                     return response.json();
                 })
                 .then(data => processData(data))
                 .catch(error => {
-                    // Datos Demo para que funcione sin archivo externo
+                    console.error("No se pudo cargar el JSON local:", error);
+                    
+                    // Datos de emergencia si no encuentra el archivo
+                    // Asegúrate de que el HTML esté en la misma carpeta que el JSON generado por el script de Python
                     const demoData = {
                         name: "root",
                         type: "folder",
@@ -732,7 +727,18 @@
                             { name: "Pelicula.mkv", type: "file", poster: "https://picsum.photos/seed/movie/100/150" }
                         ]
                     };
-                    processData(demoData);
+                    
+                    explorer.innerHTML = `
+                        <div class="no-results" style="flex-direction: column; gap: 10px;">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: #e74c3c;"></i>
+                            <p>Error cargando archivo JSON</p>
+                            <p style="font-size: 0.8rem">Asegúrate de ejecutar el script de Python y que este HTML esté en la misma carpeta.</p>
+                            <button class="btn btn-primary" onclick="document.getElementById('jsonFileInput').click()">
+                                <i class="fas fa-upload"></i> Cargar manualmente
+                            </button>
+                        </div>
+                    `;
+                    // processData(demoData); // Descomentar si quieres ver demo en caso de error
                 });
 
             jsonFileInput.addEventListener('change', function(e) {
@@ -809,6 +815,7 @@
                     } else {
                         let iconHtml = '';
                         const isMovie = item.name.toLowerCase().match(/\.(mp4|mkv|avi|mov|wmv|flv)$/);
+                        // Esta parte ya funciona para rutas locales ej: "posters_local/peli.jpg"
                         if (isMovie && item.poster) {
                             iconHtml = `<img src="${item.poster}" loading="lazy" class="poster-icon" onclick="event.stopPropagation(); openModal('${item.poster}')">`;
                         } else {
