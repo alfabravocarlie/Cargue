@@ -78,7 +78,7 @@
             gap: 10px;
             transition: transform 0.1s, background-color 0.2s;
             box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-            min-height: 48px; /* Tamaño mínimo recomendado para dedos mayores */
+            min-height: 48px;
         }
         .btn-ui:active { transform: scale(0.96); }
         
@@ -170,15 +170,7 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
-        /* --- RESALTADO DEL TUTORIAL --- */
-        .tutorial-highlight {
-            outline: 5px solid var(--accent-color) !important;
-            outline-offset: 4px;
-            position: relative;
-            z-index: 1001;
-        }
-
-        /* --- VENTANA DEL TUTORIAL (GUIADA, NO BLOQUEANTE) --- */
+        /* --- VENTANA DEL TUTORIAL --- */
         .tut-card {
             display: none;
             background-color: #fff;
@@ -272,17 +264,13 @@
         </div>
     </div>
 
-    <input type="file" id="jsonFileInput" accept=".json" style="display: none;">
-
     <script>
-        // --- CONTROL DE TAMAÑO DE FUENTE ---
         let fontModifier = 0;
         function changeFontSize(action) {
             fontModifier = Math.max(-4, Math.min(12, fontModifier + action));
             document.documentElement.style.setProperty('--font-modifier', fontModifier + 'px');
         }
 
-        // --- SISTEMA DE TUTORIAL SIMPLIFICADO ---
         const tutorial = {
             currentStep: 0,
             steps: [
@@ -310,7 +298,7 @@
                 
                 const targetEl = document.querySelector(step.target);
                 if (targetEl) {
-                    if(step.target === '#btnBackContainer') targetEl.style.display = 'block'; // Mostrar temporalmente para el tutorial
+                    if(step.target === '#btnBackContainer') targetEl.style.display = 'block';
                     targetEl.classList.add('tutorial-highlight');
                 }
             },
@@ -320,13 +308,11 @@
                 document.getElementById('tutorialCard').style.display = 'none';
                 document.querySelectorAll('.tutorial-highlight').forEach(el => el.classList.remove('tutorial-highlight'));
                 localStorage.setItem('tutorialWindowSeen', 'true');
-                // Reestablecer visibilidad del botón volver según lógica real
                 const backBtn = document.getElementById('btnBackContainer');
                 backBtn.style.display = (window.currentPathLength && window.currentPathLength > 0) ? 'block' : 'none';
             }
         };
 
-        // --- LÓGICA GENERAL ---
         document.addEventListener('DOMContentLoaded', function() {
             let fileStructure = null;
             let currentPath = [];
@@ -364,7 +350,6 @@
                 })
                 .then(data => processData(data))
                 .catch(() => {
-                    // Datos de respaldo predecibles e ilustrativos si falta el JSON original
                     processData({
                         name: "Inicio", type: "folder",
                         children: [
@@ -382,7 +367,6 @@
                 explorer.innerHTML = '';
                 window.currentPathLength = currentPath.length;
 
-                // Controlar visibilidad del botón gigante para volver atrás
                 if (currentPath.length > 0 && !isSearchMode) {
                     backBtnContainer.style.display = "block";
                 } else {
@@ -428,9 +412,16 @@
                         let iconHtml = `<i class="fas fa-file file-icon"></i>`;
                         const isMovie = item.name.toLowerCase().match(/\.(mp4|mkv|avi|mov|jpeg|jpg|png|webp)$/);
                         if (isMovie && item.poster) {
-                            iconHtml = `<img src="${item.poster}" loading="lazy" class="poster-icon" onclick="event.stopPropagation(); openModal('${item.poster}')">`;
+                            iconHtml = `<img src="${item.poster}" loading="lazy" class="poster-icon">`;
                         }
                         element.innerHTML = `${iconHtml} <span>${highlightText(item.name)}</span>`;
+                        
+                        // ✨ CAMBIO AQUÍ: Al presionar ARRIBA de cualquier parte de la fila del archivo, se muestra el póster
+                        if (item.poster) {
+                            element.addEventListener('click', () => {
+                                openModal(item.poster);
+                            });
+                        }
                     }
                     container.appendChild(element);
                 });
@@ -446,21 +437,27 @@
                     element.className = result.item.type;
                     let iconHtml = result.item.type === 'folder' ? '<i class="fas fa-folder folder-icon"></i>' : '<i class="fas fa-file file-icon"></i>';
                     if (result.item.poster) {
-                        iconHtml = `<img src="${result.item.poster}" loading="lazy" class="poster-icon" onclick="event.stopPropagation(); openModal('${result.item.poster}')">`;
+                        iconHtml = `<img src="${result.item.poster}" loading="lazy" class="poster-icon">`;
                     }
                     element.innerHTML = `${iconHtml} <div><b>${highlightText(result.item.name)}</b><div style="font-size:0.85em; color:#7f8c8d;">Ubicación: /${result.path}</div></div>`;
                     
                     element.addEventListener('click', () => {
-                        if (result.item.type === 'folder') {
+                        // ✨ CAMBIO AQUÍ: En el buscador, si tiene póster, abrirlo directamente al hacer clic
+                        if (result.item.type === 'file' && result.item.poster) {
+                            openModal(result.item.poster);
+                        } else if (result.item.type === 'folder') {
                             currentPath = result.path.split('/').filter(p => p);
+                            isSearchMode = false;
+                            document.getElementById('searchInput').value = '';
+                            renderExplorer();
                         } else {
                             let parts = result.path.split('/');
                             parts.pop();
                             currentPath = parts.filter(p => p);
+                            isSearchMode = false;
+                            document.getElementById('searchInput').value = '';
+                            renderExplorer();
                         }
-                        isSearchMode = false;
-                        document.getElementById('searchInput').value = '';
-                        renderExplorer();
                     });
                     container.appendChild(element);
                 });
