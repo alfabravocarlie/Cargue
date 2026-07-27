@@ -1,0 +1,1404 @@
+{
+    "resumen": {
+        "total_novelas": 232,
+        "total_capitulos": 12353,
+        "total_completas": 165,
+        "total_en_progreso": 67
+    },
+    "completas": [
+        {
+            "categoria": "Accion",
+            "novela": "Alas libres (Doblada al Español) [Turquía]",
+            "capitulos": 10,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "Copia Pablo Escobar El Patron Del Mal",
+            "capitulos": 95,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "El Chapo 1",
+            "capitulos": 7,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "El Chapo 2",
+            "capitulos": 12,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "El Chapo 3",
+            "capitulos": 57,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "El Dandy [Caps 70] mexico droga",
+            "capitulos": 70,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "La Ley Secreta (droga colombia)",
+            "capitulos": 60,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "La Sustituta [FIN]",
+            "capitulos": 51,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "La fuga (Doblada al Español) [Turquía]",
+            "capitulos": 8,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "Las Hermanas Guerra (Temporada 1) [20 Cap. FDT]",
+            "capitulos": 20,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "Niños de la calle (Doblada al Español) [Turquía]",
+            "capitulos": 24,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "Pablo Escobar El Patron Del Mal",
+            "capitulos": 113,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "Paraiso Blanco [FIN]",
+            "capitulos": 30,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "Paraiso travel [Colombiana]",
+            "capitulos": 72,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "Perseguidos (El Capo) -MEXICANA",
+            "capitulos": 60,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "Red Secreta [FIN]",
+            "capitulos": 10,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "Red secreta (Doblada al Español) [Turquía]",
+            "capitulos": 10,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "Rosario tijeras [Mexico] [Temp-1]",
+            "capitulos": 60,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "Ruta 35",
+            "capitulos": 30,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Accion",
+            "novela": "Verdad oculta [DROGA] [COLOMBIA]",
+            "capitulos": 62,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "Amor perfecto",
+            "capitulos": 65,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "Belleza Fatal",
+            "capitulos": 40,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "Ciudad prohibida",
+            "capitulos": 11,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "El Cazador",
+            "capitulos": 13,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "El Otro Lado del Paraiso",
+            "capitulos": 85,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "Feliz",
+            "capitulos": 8,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "La Esclava Madre",
+            "capitulos": 161,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "La chica del momento",
+            "capitulos": 58,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "Las reglas del juego",
+            "capitulos": 150,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "Mania de ti",
+            "capitulos": 111,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "Partes de Mi",
+            "capitulos": 45,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "Querer Sin Limites",
+            "capitulos": 146,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "Renacer",
+            "capitulos": 190,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "Travesia",
+            "capitulos": 88,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "Vale todo",
+            "capitulos": 101,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "Verdades secretas",
+            "capitulos": 47,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "Accidente",
+            "capitulos": 10,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "El Barón - 59 [COL]",
+            "capitulos": 59,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "El Bronx - 81 [COL]",
+            "capitulos": 81,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "El del Paraiso",
+            "capitulos": 82,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "Infiltrados",
+            "capitulos": 37,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "La Hija del Mariachi 2025",
+            "capitulos": 91,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "La Mariposa",
+            "capitulos": 1,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "Nada Personal",
+            "capitulos": 80,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "Paraiso Blanco (Temporada 2)",
+            "capitulos": 15,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "Regreso a La Guaca",
+            "capitulos": 27,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "Sin Senos Si Hay Paraiso",
+            "capitulos": 89,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "Sin Senos Si Hay Paraiso 2",
+            "capitulos": 87,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "Sin Senos Si Hay Paraiso 3",
+            "capitulos": 64,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "rico pobre",
+            "capitulos": 58,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "A mar",
+            "capitulos": 90,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Amanecer",
+            "capitulos": 80,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Amor Amargo",
+            "capitulos": 80,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Atrapada",
+            "capitulos": 60,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Cautiva por amor",
+            "capitulos": 69,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Domenica montero",
+            "capitulos": 50,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Dueños del paraiso",
+            "capitulos": 69,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "El Amor no Tiene Receta",
+            "capitulos": 95,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "El Angel de Aurora",
+            "capitulos": 135,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "El Chema [Temp-1]",
+            "capitulos": 85,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "El Señor de los Cielos (Dinastia Casillas) (Temporada 10)",
+            "capitulos": 91,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "El Señor de los Cielos (Temporada 9)",
+            "capitulos": 94,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "El del paraiso",
+            "capitulos": 82,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "El dragon",
+            "capitulos": 82,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "El precio de amarte",
+            "capitulos": 50,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Juego de mentiras",
+            "capitulos": 79,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Juegos de Amor y Poder",
+            "capitulos": 70,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "LA HIJA DEL MARIACHI",
+            "capitulos": 141,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "La Historia De Juana",
+            "capitulos": 65,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "La Jefa",
+            "capitulos": 94,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "La Mujer de mi Vida",
+            "capitulos": 95,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "La venganza de analia (Temporada 1)",
+            "capitulos": 123,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Las Hijas de la Señora García",
+            "capitulos": 80,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Los hilos del pasado",
+            "capitulos": 60,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Marea de Pasiones",
+            "capitulos": 64,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Me Atrevo a Amarte",
+            "capitulos": 86,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Mi verdad oculta",
+            "capitulos": 81,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Monteverde",
+            "capitulos": 86,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Mujer de nadie",
+            "capitulos": 45,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Nido de Víboras",
+            "capitulos": 17,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Pacto de sangre",
+            "capitulos": 20,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Papas por Conveniencia",
+            "capitulos": 81,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Sed de Venganza",
+            "capitulos": 83,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Tu Vida es mi Vida",
+            "capitulos": 87,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Valentina, mi amor especial",
+            "capitulos": 39,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Velvet el nuevo imperio",
+            "capitulos": 90,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Vencer la culpa",
+            "capitulos": 40,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Vivir de Amor",
+            "capitulos": 120,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "Vuelve a mi",
+            "capitulos": 34,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "7 caras",
+            "capitulos": 7,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Alaca",
+            "capitulos": 119,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Alta Sociedad",
+            "capitulos": 57,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Amor imposible [Gulcemal]",
+            "capitulos": 18,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Azize",
+            "capitulos": 18,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Bahar es",
+            "capitulos": 110,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Bondad",
+            "capitulos": 59,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Ciudad lejana",
+            "capitulos": 74,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Destino Roto",
+            "capitulos": 121,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Disparates del destino",
+            "capitulos": 8,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "El Destino",
+            "capitulos": 30,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "El Respeto",
+            "capitulos": 8,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "El fuego del destino",
+            "capitulos": 48,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "El nombre de la felicidad",
+            "capitulos": 34,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "El padre",
+            "capitulos": 224,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "El sastre",
+            "capitulos": 23,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "En todas partes tu",
+            "capitulos": 70,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Eres mi prision",
+            "capitulos": 9,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Esa Chica",
+            "capitulos": 60,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Espuma",
+            "capitulos": 15,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Experta en amor",
+            "capitulos": 12,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Familia",
+            "capitulos": 95,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Guerra de Rosas",
+            "capitulos": 68,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Historias de verano",
+            "capitulos": 29,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Huesped",
+            "capitulos": 14,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Icerde",
+            "capitulos": 99,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Identidad Oculta",
+            "capitulos": 30,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Inocencia",
+            "capitulos": 24,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Invierno",
+            "capitulos": 33,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Jaula dorada",
+            "capitulos": 16,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Juego de Amor",
+            "capitulos": 33,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Juegos Del Destino",
+            "capitulos": 58,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Karsu es",
+            "capitulos": 43,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Kuma la otra esposa",
+            "capitulos": 100,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "La gran mentira",
+            "capitulos": 37,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Las estrellas son mis testigos",
+            "capitulos": 4,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Leyla",
+            "capitulos": 108,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Leylifer",
+            "capitulos": 113,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Los golpes de la vida",
+            "capitulos": 18,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Los otros",
+            "capitulos": 87,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Luciernaga",
+            "capitulos": 51,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Luna Llena",
+            "capitulos": 68,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Madrastra",
+            "capitulos": 40,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Marasli",
+            "capitulos": 59,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Mas hermosa que tu",
+            "capitulos": 42,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Mentiras y velas",
+            "capitulos": 13,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Mi Lado Izquierdo",
+            "capitulos": 36,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Mi Nombre es Farah",
+            "capitulos": 83,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Mi mentira mas dulce",
+            "capitulos": 72,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Nadie sabe es [secreto de amor]",
+            "capitulos": 88,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "No tengas miedo, estoy contigo",
+            "capitulos": 21,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Nuestra historia",
+            "capitulos": 200,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Organizacion",
+            "capitulos": 19,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Otra persona",
+            "capitulos": 24,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Otro amor",
+            "capitulos": 49,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Palpitaciones",
+            "capitulos": 45,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Perdido en el amor",
+            "capitulos": 73,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Propuesta Indecente [Beirut]",
+            "capitulos": 64,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Punto Ciego",
+            "capitulos": 20,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Que pasa si amas demasiado",
+            "capitulos": 40,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Querido pasado",
+            "capitulos": 24,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Renacer",
+            "capitulos": 64,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Rumi",
+            "capitulos": 30,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Segundas oportunidades",
+            "capitulos": 44,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Selin Un Amor Inolvidable",
+            "capitulos": 45,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Señor Equivocado",
+            "capitulos": 38,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Sonrie a tu destino",
+            "capitulos": 14,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Suhan",
+            "capitulos": 78,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Te Guarde en mi Corazón",
+            "capitulos": 19,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Te contare un secreto",
+            "capitulos": 28,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Te lo prometo",
+            "capitulos": 21,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Todo por Amor",
+            "capitulos": 15,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Tu alma no escucha",
+            "capitulos": 9,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Volver a casa",
+            "capitulos": 45,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Yasamayanlar [guerra de vampiros]",
+            "capitulos": 8,
+            "estado": "COMPLETA"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "novia [yeni gelin]",
+            "capitulos": 44,
+            "estado": "COMPLETA"
+        }
+    ],
+    "en_progreso": [
+        {
+            "categoria": "Brasileñas",
+            "novela": "[Estreno] Al desnudo (Doblada al Español) [Brasil]",
+            "capitulos": 3,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "[Estreno] Dueña de mi (Doblada al Español) [Brasil]",
+            "capitulos": 73,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "[Estreno] Fuerza del deseo (Doblada al Español) [Brasil]",
+            "capitulos": 106,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "[Estreno] Señora del destino (Doblada al Español) [Brasil]",
+            "capitulos": 71,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "[Estreno] Traicionados (Doblada al Español) [Brasil]",
+            "capitulos": 4,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Brasileñas",
+            "novela": "[Estreno] Tres gracias (Doblada al Español) [Brasil]",
+            "capitulos": 5,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "[! Estreno] La Reina del Flow (Temporada 3) [Colombia]",
+            "capitulos": 65,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "[Estreno] Clase ejecutiva [Colombia]",
+            "capitulos": 20,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "[Estreno] Las azules [Colombia]",
+            "capitulos": 10,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "[Estreno] Las de siempre [Colombia]",
+            "capitulos": 91,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "[Estreno] Maria la caprichosa [Colombia]",
+            "capitulos": 64,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Colombianas",
+            "novela": "[Estreno] Rosario Tijeras (Temporada 5) [Colombia]",
+            "capitulos": 38,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Completas",
+            "novela": "Mexicana",
+            "capitulos": 184,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "General",
+            "novela": "Cubana",
+            "capitulos": 0,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "India",
+            "novela": "[Estreno] Amor y magia (Doblada al Español) [India]",
+            "capitulos": 25,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "India",
+            "novela": "[Estreno] Bahu begum (Doblada al Español) [India]",
+            "capitulos": 130,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "India",
+            "novela": "[Estreno] Ten a mi hijo (Doblada al Español) [India]",
+            "capitulos": 50,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "India",
+            "novela": "[Estreno] Tumhari paakhi (Doblada al Español) [India]",
+            "capitulos": 124,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "[Estreno] Amor de oficina [Mexico]",
+            "capitulos": 8,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "[Estreno] Corazon de oro [Mexico]",
+            "capitulos": 80,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "[Estreno] El Señor de los Cielos (Temporada 10) [Mexico]",
+            "capitulos": 5,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "[Estreno] El precio de la fama [Mexico]",
+            "capitulos": 8,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "[Estreno] El renacer de luna [Mexico]",
+            "capitulos": 21,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "[Estreno] Enloqueciendo contigo [Mexico]",
+            "capitulos": 40,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "[Estreno] Entre padre e hijo [Mexico]",
+            "capitulos": 20,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "[Estreno] Guardian de mi vida [Mexico]",
+            "capitulos": 45,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "[Estreno] Hermanas, un amor compartido [Mexico]",
+            "capitulos": 79,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "[Estreno] Lobo, morir matando [Mexico]",
+            "capitulos": 61,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "[Estreno] Los encantos del sinverguenza [Mexico]",
+            "capitulos": 10,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "[Estreno] Mi Rival [Mexico]",
+            "capitulos": 52,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "[Estreno] Tan cerca de ti nace el amor [Mexico]",
+            "capitulos": 35,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Mexicanas",
+            "novela": "[Estreno] Una familia complicada [Mexico]",
+            "capitulos": 19,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Nuevas",
+            "novela": "[Estreno] Amor eterno (Doblada al Español) [Turquía]",
+            "capitulos": 197,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Nuevas",
+            "novela": "[Estreno] Dos extraños (Doblada al Español) [Turquía]",
+            "capitulos": 12,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Nuevas",
+            "novela": "[Estreno] El amor no entiende de palabras (Doblada al Español) [Turquía]",
+            "capitulos": 101,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Nuevas",
+            "novela": "[Estreno] Reyezuelo (Doblada al Español) [Turquía]",
+            "capitulos": 43,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "Beni boyle sev [quiereme como soy] turca subt",
+            "capitulos": 10,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Aliye (Doblada al Español) [Turquía]",
+            "capitulos": 7,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Amor ardiente (Doblada al Español) [Turquía]",
+            "capitulos": 4,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Amor del cielo a la tierra (Doblada al Español) [Turquía]",
+            "capitulos": 12,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Asuntos del corazon (Doblada al Español) [Turquía]",
+            "capitulos": 6,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Bendice a los angeles (Doblada al Español) [Turquía]",
+            "capitulos": 9,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Confidencial (Doblada al Español) [Turquía]",
+            "capitulos": 8,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Contra el destino (Doblada al Español) [Turquía]",
+            "capitulos": 19,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Cuento de una noche (Doblada al Español) [Turquía]",
+            "capitulos": 26,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Destino (Doblada al Español) [Turquía]",
+            "capitulos": 33,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Dos por ciento (Doblada al Español) [Turquía]",
+            "capitulos": 10,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Ecos segundo acto (Doblada al Español) [Turquía]",
+            "capitulos": 10,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] El arbol de los secretos (Doblada al Español) [Turquía]",
+            "capitulos": 11,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] El juramento de una madre (Doblada al Español) [Turquía]",
+            "capitulos": 15,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] El principe (Doblada al Español) [Turquía]",
+            "capitulos": 23,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] El valle de los lobos (Doblada al Español) [Turquía]",
+            "capitulos": 96,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Exiliados (Doblada al Español) [Turquía]",
+            "capitulos": 10,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Flores de sangre (Doblada al Español) [Turquía]",
+            "capitulos": 138,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Historias de encaje de rosas (Doblada al Español) [Turquía]",
+            "capitulos": 7,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] La Belleza Peligrosa (Doblada al Español) [Turquía]",
+            "capitulos": 14,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] La casa con parra (Doblada al Español) [Turquía]",
+            "capitulos": 12,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] La era de los tulipanes (Doblada al Español) [Turquía]",
+            "capitulos": 21,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] La novia (Doblada al Español) [Turquía]",
+            "capitulos": 45,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Los cortesanos de hoy (Doblada al Español) [Turquía]",
+            "capitulos": 27,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Mi otra yo (Doblada al Español) [Turquía]",
+            "capitulos": 24,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Nada nos pasara (Doblada al Español) [Turquía]",
+            "capitulos": 8,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Promesa de hermanos (Doblada al Español) [Turquía]",
+            "capitulos": 44,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Tablero negro (Doblada al Español) [Turquía]",
+            "capitulos": 40,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Te amo mi amor (Doblada al Español) [Turquía]",
+            "capitulos": 7,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Turco cautivo en la isla del diablo (Doblada al Español) [Turquía]",
+            "capitulos": 4,
+            "estado": "EN PROGRESO"
+        },
+        {
+            "categoria": "Turcas",
+            "novela": "[Estreno] Uzak sehir (Subtitulada) [Turquía]",
+            "capitulos": 35,
+            "estado": "EN PROGRESO"
+        }
+    ]
+}
