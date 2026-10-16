@@ -283,6 +283,11 @@
             font-family: 'Nunito', sans-serif; font-size: calc(.95rem + var(--font-modifier));
         }
         .wa-hint { font-size: calc(.82rem + var(--font-modifier)); color: #7f8c8d; margin-top: 8px; text-align: center; }
+        .estimate { background: #eef6ff; border: 2px dashed #2e86de; border-radius: 12px; padding: 12px 14px; margin: 4px 14px 10px; }
+        .est-row { display: flex; justify-content: space-between; font-size: calc(.9rem + var(--font-modifier)); color: #34495e; margin-bottom: 4px; }
+        .est-row b { color: #1a1a1a; }
+        .est-total { font-size: calc(1.15rem + var(--font-modifier)); font-weight: 800; color: #1e8449; margin: 8px 0 6px; text-align: center; }
+        .est-disc { font-size: calc(.8rem + var(--font-modifier)); color: #5d6d7e; margin: 0; line-height: 1.45; }
 
         /* --- Cabecera en teléfonos angostos --- */
         @media (max-width: 560px) {
@@ -358,6 +363,12 @@
         <div class="sheet">
             <div class="sheet-head"><h2>🛒 Mi pedido</h2><button class="x" id="cartClose">✕</button></div>
             <div class="cart-items" id="cartItems"></div>
+            <div class="estimate" id="estimateBox" style="display:none">
+                <div class="est-row" id="estChaptersRow" style="display:none"><span>📺 Capítulos <span id="estChaptersN"></span></span><b id="estChaptersP"></b></div>
+                <div class="est-row" id="estGBRow" style="display:none"><span>📦 Otros (<span id="estGB"></span>, rango <span id="estRange"></span>)</span><b id="estGBPrice"></b></div>
+                <div class="est-total">💰 Total estimado: <span id="estPrice">—</span></div>
+                <p class="est-disc">💡 Este precio es solo una referencia estimada según el contenido de tu pedido. Puede variar en dependencia del tipo de archivo, pero por lo general es muy cercano al precio final, que se confirma al preparar tu memoria.</p>
+            </div>
             <div class="cart-foot">
                 <label for="cartName">Tu nombre:</label>
                 <input id="cartName" placeholder="Escribe tu nombre" autocomplete="name">
@@ -381,6 +392,29 @@
            Ejemplo: "5351234567"
            ============================================================ */
         const WHATSAPP_NUMBER = "5358682731";
+
+        /* Precio por capítulo de novela (archivos de video tipo [Cap-12]).
+           Los capítulos de más de 1 hora llevan PRECIO_CAPITULO_LARGO. */
+        const PRECIO_CAPITULO = 5;
+        const PRECIO_CAPITULO_LARGO = 10;
+
+        /* ============================================================
+           TARIFAS POR RANGO DE GB — edítalas aquí cuando cambien tus
+           precios. Formato: [hasta_GB, etiqueta, precio]
+           El pedido cae en el primer rango cuyo "hasta_GB" lo cubra.
+           ============================================================ */
+        const TARIFAS_GB = [
+            [1.00,   "1 GB",   30],
+            [2.00,   "2 GB",   50],
+            [4.00,   "4 GB",   100],
+            [7.45,   "8 GB",   150],
+            [14.90,  "16 GB",  250],
+            [29.80,  "32 GB",  300],
+            [59.60,  "64 GB",  350],
+            [119.21, "128 GB", 400],
+            [238.42, "256 GB", 800],
+            [476.84, "512 GB", 1600]
+        ];
 
         const tutorial = {
             currentStep: 0,
@@ -445,6 +479,70 @@
             const inCart = (p) => !!cart[p];
             const escapeHtml = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
+            /* ---- estimación de precio por tamaño ---- */
+            const nodeSize = (n) => {
+                if (!n) return 0;
+                if (n.type === 'file') return n.size || 0;
+                return (n.children || []).reduce((a, c) => a + nodeSize(c), 0);
+            };
+            const findNodeByPath = (path) => {
+                let n = fileStructure;
+                for (const part of path.split('/')) {
+                    n = (n.children || []).find(c => c.name === part);
+                    if (!n) return null;
+                }
+                return n;
+            };
+            const rangeForGB = (gb) => {
+                for (const [hasta, etiqueta, precio] of TARIFAS_GB) {
+                    if (gb <= hasta) return { etiqueta, precio };
+                }
+                return null;
+            };
+            const fmtSize = (bytes) => {
+                if (bytes >= 1073741824) return (bytes / 1073741824).toFixed(2) + ' GB';
+                return (bytes / 1048576).toFixed(1) + ' MB';
+            };
+            /* ---- clasificación capítulos vs resto ---- */
+            const CHAPTER_RE = /\[\s*cap(?:[íi]tulo)?\s*-?\d+/i;
+            const VIDEO_RE = /\.(mp4|mkv|avi|mov|wmv|flv|webm|m4v|ts|vob)$/i;
+            const isVideo = (name) => VIDEO_RE.test(name || '');
+            // novela = el directorio contiene la palabra "novela" en su ruta
+            const isNovelaPath = (p) => (p || '').toLowerCase().includes('novela');
+            const chapterDetail = (bd) => {
+                const parts = [];
+                if (bd.chapters5) parts.push(`${bd.chapters5}×$${PRECIO_CAPITULO}`);
+                if (bd.chapters10) parts.push(`${bd.chapters10}×$${PRECIO_CAPITULO_LARGO}`);
+                return `(${parts.join(' + ')})`;
+            };
+            // desglose del pedido: capítulos de novela ($5, $10 si duran +1h), resto por rango de GB
+            function priceBreakdown(){
+                let chapters5 = 0, chapters10 = 0, bytesOtros = 0;
+                const addFile = (node, novela) => {
+                    if (isVideo(node.name) && (novela || CHAPTER_RE.test(node.name))) {
+                        if ((node.dur || 0) > 3600) chapters10++;
+                        else chapters5++;
+                    } else bytesOtros += node.size || 0;
+                };
+                Object.keys(cart).forEach(p => {
+                    const n = findNodeByPath(p);
+                    if (!n) { bytesOtros += cart[p].size || 0; return; }
+                    const novela = isNovelaPath(p);
+                    if (n.type === 'file') addFile(n, novela);
+                    else (function walk(x){
+                        if (x.type === 'file') addFile(x, novela);
+                        else (x.children || []).forEach(walk);
+                    })(n);
+                });
+                const chapters = chapters5 + chapters10;
+                const gb = bytesOtros / 1073741824;
+                const range = bytesOtros > 0 ? rangeForGB(gb) : null;
+                const total = chapters5 * PRECIO_CAPITULO + chapters10 * PRECIO_CAPITULO_LARGO + (range ? range.precio : 0);
+                return { chapters, chapters5, chapters10, bytesOtros, gb, range, total,
+                         hasData: chapters > 0 || bytesOtros > 0 };
+            }
+            let lastEstimate = null;
+
             function updateFab(){
                 const n = cartCount();
                 document.getElementById('cartN').textContent = n;
@@ -456,7 +554,7 @@
                 btn.textContent = on ? '✓' : '+';
                 btn.title = on ? 'Quitar del pedido' : 'Agregar al pedido';
             }
-            function makeAddBtn(path, name, type){
+            function makeAddBtn(path, name, type, size){
                 const b = document.createElement('button');
                 b.className = 'row-add';
                 b.type = 'button';
@@ -464,7 +562,7 @@
                 b.addEventListener('click', (e) => {
                     e.stopPropagation();
                     if (cart[path]) delete cart[path];
-                    else cart[path] = { name: name, path: path, type: type };
+                    else cart[path] = { name: name, path: path, type: type, size: size || 0 };
                     saveCart(); updateFab(); renderCartItems();
                     syncAddBtn(b, path);
                 });
@@ -497,6 +595,34 @@
                     d.appendChild(rm);
                     box.appendChild(d);
                 });
+                /* ---- estimación de precio ---- */
+                const ebox = document.getElementById('estimateBox');
+                const bd = priceBreakdown();
+                lastEstimate = bd.hasData ? bd : null;
+                if (bd.hasData) {
+                    const chRow = document.getElementById('estChaptersRow');
+                    if (bd.chapters > 0) {
+                        document.getElementById('estChaptersN').textContent = chapterDetail(bd);
+                        document.getElementById('estChaptersP').textContent = '$' + (bd.chapters5 * PRECIO_CAPITULO + bd.chapters10 * PRECIO_CAPITULO_LARGO).toFixed(2);
+                        chRow.style.display = 'flex';
+                    } else chRow.style.display = 'none';
+                    const gbRow = document.getElementById('estGBRow');
+                    if (bd.bytesOtros > 0) {
+                        document.getElementById('estGB').textContent = fmtSize(bd.bytesOtros);
+                        if (bd.range) {
+                            document.getElementById('estRange').textContent = bd.range.etiqueta;
+                            document.getElementById('estGBPrice').textContent = '$' + bd.range.precio.toFixed(2);
+                        } else {
+                            document.getElementById('estRange').textContent = 'máximo superado';
+                            document.getElementById('estGBPrice').textContent = 'A consultar';
+                        }
+                        gbRow.style.display = 'flex';
+                    } else gbRow.style.display = 'none';
+                    document.getElementById('estPrice').textContent = '$' + bd.total.toFixed(2);
+                    ebox.style.display = 'block';
+                } else {
+                    ebox.style.display = 'none';
+                }
                 updateWa();
             }
             document.getElementById('cartClear').addEventListener('click', () => {
@@ -516,6 +642,13 @@
                     msg += `${i+1}. ${it.name}\n   📁 ${it.path}\n`;
                 });
                 msg += `\nTotal: ${keys.length} elemento(s)`;
+                if (lastEstimate) {
+                    const parts = [];
+                    if (lastEstimate.chapters > 0) parts.push(`${lastEstimate.chapters} caps ${chapterDetail(lastEstimate)}`);
+                    if (lastEstimate.bytesOtros > 0) parts.push(`${fmtSize(lastEstimate.bytesOtros)}${lastEstimate.range ? ' (rango ' + lastEstimate.range.etiqueta + ')' : ''}`);
+                    msg += `\n💰 Estimado: $${lastEstimate.total.toFixed(2)} (${parts.join(' + ')})`;
+                    msg += `\n_(precio de referencia, puede variar según el tipo de archivo)_`;
+                }
                 wa.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
                 wa.target = '_blank'; wa.rel = 'noopener';
                 wa.classList.remove('disabled');
@@ -534,6 +667,15 @@
 
             function processData(data) {
                 fileStructure = data;
+                // completar tamaños de elementos guardados en el carrito antes
+                let changed = false;
+                Object.keys(cart).forEach(p => {
+                    if (!cart[p].size) {
+                        const n = findNodeByPath(p);
+                        if (n) { cart[p].size = nodeSize(n); changed = true; }
+                    }
+                });
+                if (changed) saveCart();
                 renderExplorer();
                 refreshIndicator.style.display = 'none';
                 if (!localStorage.getItem('tutorialWindowSeen')) {
@@ -602,7 +744,7 @@
 
                     if (item.type === 'folder') {
                         element.innerHTML = `<i class="fas fa-folder folder-icon"></i> <span>${highlightText(item.name)}</span>`;
-                        element.appendChild(makeAddBtn([...currentPath, item.name].join('/'), item.name, 'folder'));
+                        element.appendChild(makeAddBtn([...currentPath, item.name].join('/'), item.name, 'folder', nodeSize(item)));
                         element.addEventListener('click', () => {
                             currentPath.push(item.name);
                             renderExplorer();
@@ -614,7 +756,7 @@
                             iconHtml = `<img src="${item.poster}" loading="lazy" class="poster-icon">`;
                         }
                         element.innerHTML = `${iconHtml} <span>${highlightText(item.name)}</span>`;
-                        element.appendChild(makeAddBtn([...currentPath, item.name].join('/'), item.name, 'file'));
+                        element.appendChild(makeAddBtn([...currentPath, item.name].join('/'), item.name, 'file', nodeSize(item)));
 
                         // ✨ CAMBIO AQUÍ: Al presionar ARRIBA de cualquier parte de la fila del archivo, se muestra el póster
                         if (item.poster) {
@@ -640,7 +782,7 @@
                         iconHtml = `<img src="${result.item.poster}" loading="lazy" class="poster-icon">`;
                     }
                     element.innerHTML = `${iconHtml} <div><b>${highlightText(result.item.name)}</b><div style="font-size:0.85em; color:#7f8c8d;">Ubicación: /${result.path}</div></div>`;
-                    element.appendChild(makeAddBtn(result.path, result.item.name, result.item.type));
+                    element.appendChild(makeAddBtn(result.path, result.item.name, result.item.type, nodeSize(result.item)));
 
                     element.addEventListener('click', () => {
                         // ✨ CAMBIO AQUÍ: En el buscador, si tiene póster, abrirlo directamente al hacer clic
